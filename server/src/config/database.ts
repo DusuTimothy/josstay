@@ -68,7 +68,7 @@ export const sequelize = new Sequelize(env.DATABASE_URL, {
 export async function connectDatabase(): Promise<void> {
   await sequelize.authenticate();
   console.log(
-    `✅ Database connected (Aiven PostgreSQL, TLS verify ${env.DB_SSL ? "on" : "off"})`,
+    `✅ Database connected (PostgreSQL, TLS verify ${env.DB_SSL ? "on" : "off"})`,
   );
 }
 
