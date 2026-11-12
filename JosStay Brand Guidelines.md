@@ -599,8 +599,8 @@ A map pin with a doorway cut into it and a small gold light in the doorway. The 
 
 | Part | Specification |
 | --- | --- |
-| Mark | Map pin in Deep Ocean `#173B4D`, with an arched doorway in Warm Ivory `#F7F4ED` and a Muted Gold `#B99A62` dot. |
-| Wordmark | JosStay set in Fraunces, with **Jos** in Bold (700) and Stay in Regular italic (400), both in the same colour. Tight letter-spacing. |
+| Mark | Map pin in Deep Ocean `#173B4D`, with an arched doorway in Warm Ivory `#F7F4ED` and a Muted Gold `#B99A62` dot. Used as the app icon and favicon. |
+| Wordmark | **josstay.** — the name in lower case, set in the interface face at Bold weight with tight tracking (-0.045em), closed with a full stop. Reversed to Warm Ivory on Deep Ocean. |
 | Tagline | "Your city, your stay." in Inter Regular, Charcoal `#283238`. Used under the wordmark on larger sizes. |
 
 ### Versions
@@ -627,7 +627,7 @@ A map pin with a doorway cut into it and a small gold light in the doorway. The 
 
 ### Open
 
-- The wordmark uses live Fraunces text on the board and the tagline uses Inter. Before production, convert it to outlines so it looks identical everywhere, and export the final SVG and PNG files.
+- The wordmark is set live in the interface face. Before production, convert it to outlines so it looks identical everywhere, and export the final SVG and PNG files.
 - Test the pin at 16 px for the favicon.
 - CAC name registration and trademark checks: to be handled at production.
 
