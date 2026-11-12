@@ -261,3 +261,4 @@ The checklist above is the order to build in. This list explains what each area 
 10. **JSON-LD** — already wired for `Organization`, `WebSite` and hotel pages; extend it to other public pages and validate with Google's Rich Results Test.
 
 > The sample hotels, destinations and photography URLs are placeholders. Replace them with real, verified Jos listings before launch.
+# josstay
