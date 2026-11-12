@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply min-h-dvh bg-ivory font-sans text-body text-charcoal antialiased;
+  }
+
+  h1,
+  h2 {
+    @apply font-serif text-ocean;
+    text-wrap: balance;
+  }
+
+  h3 {
+    @apply font-sans font-semibold text-ocean;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: theme("colors.sage.soft");
+    color: theme("colors.ocean");
+  }
+
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  summary {
+    @apply focus-visible:outline-none;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.55;
+  }
+
+  /* Keep the native date text from clipping on small screens. */
+  input[type="date"] {
+    min-width: 0;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

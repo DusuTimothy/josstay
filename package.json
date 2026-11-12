@@ -1,0 +1,25 @@
+{
+  "name": "josstay",
+  "version": "0.1.0",
+  "private": true,
+  "description": "JosStay — Your city, your stay. Client and server for the Jos hotel booking platform.",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -n client,server -c cyan,yellow \"npm run dev -w @josstay/client\" \"npm run dev -w @josstay/server\"",
+    "dev:client": "npm run dev -w @josstay/client",
+    "dev:server": "npm run dev -w @josstay/server",
+    "build": "npm run build -w @josstay/client && npm run build -w @josstay/server",
+    "typecheck": "npm run typecheck -w @josstay/client && npm run typecheck -w @josstay/server",
+    "db:sync": "npm run db:sync -w @josstay/server",
+    "db:seed": "npm run db:seed -w @josstay/server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}

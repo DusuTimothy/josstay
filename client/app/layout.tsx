@@ -1,0 +1,94 @@
+import type { Metadata, Viewport } from "next";
+import { Fraunces, Inter } from "next/font/google";
+import { Footer } from "@/components/layout/footer";
+import { Header } from "@/components/layout/header";
+import { SITE } from "@/lib/constants";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: `${SITE.name} — ${SITE.tagline}`,
+    template: `%s · ${SITE.name}`,
+  },
+  description: SITE.description,
+  applicationName: SITE.name,
+  keywords: [
+    "Jos hotels",
+    "hotel booking Jos",
+    "Plateau State hotels",
+    "JosStay",
+    "book a hotel in Jos",
+  ],
+  authors: [{ name: SITE.name }],
+  openGraph: {
+    type: "website",
+    locale: "en_NG",
+    siteName: SITE.name,
+    title: `${SITE.name} — ${SITE.tagline}`,
+    description: SITE.description,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE.name} — ${SITE.tagline}`,
+    description: SITE.description,
+  },
+  icons: {
+    icon: "/icon.svg",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#173B4D",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  const organization = organizationJsonLd();
+  const website = websiteJsonLd();
+
+  return (
+    <html lang="en-NG" className={`${inter.variable} ${fraunces.variable}`}>
+      <body>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-ocean focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-ivory"
+        >
+          Skip to content
+        </a>
+
+        <Header />
+
+        <main id="main-content">{children}</main>
+
+        <Footer />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }}
+        />
+      </body>
+    </html>
+  );
+}
