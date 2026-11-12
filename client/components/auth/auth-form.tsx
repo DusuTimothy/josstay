@@ -117,7 +117,7 @@ export function AuthForm({ mode }: AuthFormProps) {
 
           <div className="flex items-center gap-3" aria-hidden="true">
             <span className="h-px flex-1 bg-sand" />
-            <span className="text-metadata text-charcoal/45">
+            <span className="text-metadata text-charcoal/75">
               or use email and password
             </span>
             <span className="h-px flex-1 bg-sand" />
@@ -192,7 +192,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         {isSignUp ? "Create account" : "Sign in"}
       </Button>
 
-      <p className="text-center text-secondary text-charcoal/65">
+      <p className="text-center text-secondary text-charcoal/75">
         {isSignUp ? (
           <>
             Already have an account?{" "}

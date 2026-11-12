@@ -48,7 +48,7 @@ export default async function HomePage() {
             <h1 className="mt-5 text-h1 text-ocean">
               Find somewhere that feels like home.
             </h1>
-            <p className="mt-4 max-w-xl text-base text-charcoal/70 sm:text-lg">
+            <p className="mt-4 max-w-xl text-base text-charcoal/75 sm:text-lg">
               Discover hotels designed around the way you travel. Clear prices,
               verified stays and instant confirmation — all in one calm place.
             </p>
@@ -56,17 +56,17 @@ export default async function HomePage() {
 
           <SearchBar className="mt-8 max-w-5xl" />
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-secondary text-charcoal/65">
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-secondary text-charcoal/75">
             <span className="inline-flex items-center gap-1.5">
-              <Check className="size-4 text-sage" aria-hidden="true" />
+              <Check className="size-4 text-sage-deep" aria-hidden="true" />
               Verified hotels
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Check className="size-4 text-sage" aria-hidden="true" />
+              <Check className="size-4 text-sage-deep" aria-hidden="true" />
               Taxes included
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Check className="size-4 text-sage" aria-hidden="true" />
+              <Check className="size-4 text-sage-deep" aria-hidden="true" />
               Free cancellation on most stays
             </span>
           </div>
@@ -141,7 +141,7 @@ export default async function HomePage() {
             <h2 className="mt-3 text-h2 text-ivory">
               Confidence, built into every booking.
             </h2>
-            <p className="mt-4 max-w-xl text-body text-ivory/70">
+            <p className="mt-4 max-w-xl text-body text-ivory/85">
               We visit every hotel, check that the photos match and confirm the
               map pin in person. Prices include taxes, and the cancellation
               deadline is always shown before you pay.
@@ -178,7 +178,7 @@ export default async function HomePage() {
                 <h2 className="mt-4 text-h2 text-ocean">
                   Run a hotel in Jos?
                 </h2>
-                <p className="mt-3 max-w-xl text-secondary text-charcoal/70">
+                <p className="mt-3 max-w-xl text-secondary text-charcoal/75">
                   Join a platform built for this city. Manage your rooms, block
                   dates in seconds and receive payouts directly through
                   Paystack.
@@ -220,11 +220,11 @@ function SectionHeading({
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div className="max-w-2xl">
-        <p className="text-metadata font-semibold uppercase tracking-[0.16em] text-sage">
+        <p className="text-metadata font-semibold uppercase tracking-[0.16em] text-sage-deep">
           {eyebrow}
         </p>
         <h2 className="mt-2 text-h2 text-ocean">{title}</h2>
-        <p className="mt-2 text-secondary text-charcoal/65">{description}</p>
+        <p className="mt-2 text-secondary text-charcoal/75">{description}</p>
       </div>
       {action ? <div className="shrink-0">{action}</div> : null}
     </div>

@@ -62,7 +62,7 @@ export default async function HotelDetailPage({
     <div className="pb-20">
       <Container className="py-6">
         <nav aria-label="Breadcrumb">
-          <ol className="flex flex-wrap items-center gap-1.5 text-metadata text-charcoal/60">
+          <ol className="flex flex-wrap items-center gap-1.5 text-metadata text-charcoal/75">
             <li>
               <Link href="/" className="hover:text-ocean">
                 Home
@@ -112,7 +112,7 @@ export default async function HotelDetailPage({
 
                 <h1 className="mt-3 text-h1 text-ocean">{hotel.name}</h1>
 
-                <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-secondary text-charcoal/65">
+                <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-secondary text-charcoal/75">
                   <MapPin className="size-4 shrink-0" aria-hidden="true" />
                   {hotel.address}
                 </p>
@@ -123,7 +123,7 @@ export default async function HotelDetailPage({
                     reviewCount={hotel.reviewCount}
                     size="md"
                   />
-                  <span className="text-metadata text-charcoal/55">
+                  <span className="text-metadata text-charcoal/75">
                     {hotel.distanceKm.toFixed(1)} km from the city centre
                   </span>
                 </div>
@@ -157,7 +157,7 @@ export default async function HotelDetailPage({
                 <h2 id="location" className="text-h2 text-ocean">
                   Location
                 </h2>
-                <p className="mt-2 text-secondary text-charcoal/65">
+                <p className="mt-2 text-secondary text-charcoal/75">
                   {hotel.address}
                 </p>
 
@@ -174,7 +174,7 @@ export default async function HotelDetailPage({
                       <p className="text-secondary font-semibold text-ocean">
                         {hotel.name}
                       </p>
-                      <p className="text-metadata text-charcoal/60">
+                      <p className="text-metadata text-charcoal/75">
                         {hotel.latitude.toFixed(4)},{" "}
                         {hotel.longitude.toFixed(4)}
                       </p>

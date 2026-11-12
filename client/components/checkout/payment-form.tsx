@@ -26,7 +26,7 @@ export function PaymentForm({
           <h2 id="payment-details" className="text-h3 font-semibold text-ocean">
             Payment details
           </h2>
-          <p className="mt-1 text-secondary text-charcoal/60">
+          <p className="mt-1 text-secondary text-charcoal/75">
             You&apos;ll complete payment on Paystack&apos;s secure checkout.
           </p>
         </div>
@@ -93,8 +93,8 @@ export function PaymentForm({
         </div>
       </div>
 
-      <div className="mt-5 flex items-start gap-2.5 rounded-md bg-ivory p-3 text-metadata text-charcoal/65">
-        <ShieldCheck className="mt-0.5 size-4 shrink-0 text-sage" aria-hidden="true" />
+      <div className="mt-5 flex items-start gap-2.5 rounded-md bg-ivory p-3 text-metadata text-charcoal/75">
+        <ShieldCheck className="mt-0.5 size-4 shrink-0 text-sage-deep" aria-hidden="true" />
         <p>
           Card details are entered on Paystack. JosStay never stores your card
           number. Your total is shown before you confirm.

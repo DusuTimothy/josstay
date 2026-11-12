@@ -37,11 +37,11 @@ export function DestinationCard({
         }
         className="object-cover transition-transform duration-700 ease-calm group-hover:scale-[1.04]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-ocean/85 via-ocean/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ocean/95 via-ocean/75 to-transparent" />
 
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 sm:p-5">
         <div>
-          <p className="flex items-center gap-1.5 text-metadata font-medium text-ivory/75">
+          <p className="flex items-center gap-1.5 text-metadata font-semibold text-ivory/90">
             <MapPin className="size-3" aria-hidden="true" />
             {destination.area}
           </p>
@@ -54,11 +54,11 @@ export function DestinationCard({
             {destination.name}
           </h3>
           {featured ? (
-            <p className="mt-1 max-w-sm text-secondary text-ivory/75">
+            <p className="mt-1 max-w-sm text-secondary text-ivory/90">
               {destination.blurb}
             </p>
           ) : null}
-          <p className="mt-1.5 text-metadata text-ivory/65">
+          <p className="mt-1.5 text-metadata font-medium text-ivory/90">
             {destination.propertyCount} properties
           </p>
         </div>

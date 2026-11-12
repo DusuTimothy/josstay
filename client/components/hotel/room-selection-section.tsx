@@ -47,13 +47,13 @@ export function RoomSelectionSection() {
           <h2 id="rooms" className="text-h2 text-ocean">
             Choose your room
           </h2>
-          <p className="mt-1 text-secondary text-charcoal/60">
+          <p className="mt-1 text-secondary text-charcoal/75">
             {formatDateRange(stay.checkIn, stay.checkOut)} · {nights}{" "}
             {nights === 1 ? "night" : "nights"} ·{" "}
             {guestsLabel(stay.adults, stay.children)}
           </p>
         </div>
-        <p className="text-metadata text-charcoal/55">
+        <p className="text-metadata text-charcoal/75">
           Prices include taxes and fees
         </p>
       </div>
@@ -72,7 +72,7 @@ export function RoomSelectionSection() {
               className="pl-10"
             />
             <CalendarDays
-              className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-sage"
+              className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-sage-deep"
               aria-hidden="true"
             />
           </div>
@@ -91,7 +91,7 @@ export function RoomSelectionSection() {
               className="pl-10"
             />
             <CalendarDays
-              className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-sage"
+              className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-sage-deep"
               aria-hidden="true"
             />
           </div>
@@ -119,14 +119,14 @@ export function RoomSelectionSection() {
               ))}
             </Select>
             <Users
-              className="pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-sage"
+              className="pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-sage-deep"
               aria-hidden="true"
             />
           </div>
         </FormField>
       </div>
 
-      <p className="mt-3 text-metadata text-charcoal/60" aria-live="polite">
+      <p className="mt-3 text-metadata text-charcoal/75" aria-live="polite">
         {isChecking
           ? "Checking live availability…"
           : quote

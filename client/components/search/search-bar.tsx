@@ -71,11 +71,11 @@ export function SearchBar({
     >
       <div className="grid gap-1 md:grid-cols-[1.5fr_1fr_1fr_0.9fr_auto] md:items-stretch">
         <label className={fieldClass}>
-          <span className="text-metadata font-medium text-charcoal/60">
+          <span className="text-metadata font-medium text-charcoal/75">
             Where are you going?
           </span>
           <span className="mt-1 flex items-center gap-2">
-            <MapPin className="size-4 shrink-0 text-sage" aria-hidden="true" />
+            <MapPin className="size-4 shrink-0 text-sage-deep" aria-hidden="true" />
             <input
               type="text"
               name="destination"
@@ -83,18 +83,18 @@ export function SearchBar({
               onChange={(event) => setDestination(event.target.value)}
               placeholder="Jos, Nigeria"
               autoComplete="off"
-              className="min-w-0 w-full bg-transparent text-secondary font-medium text-charcoal outline-none placeholder:text-charcoal/40"
+              className="min-w-0 w-full bg-transparent text-secondary font-medium text-charcoal outline-none placeholder:text-charcoal/75"
             />
           </span>
         </label>
 
         <label className={fieldClass}>
-          <span className="text-metadata font-medium text-charcoal/60">
+          <span className="text-metadata font-medium text-charcoal/75">
             Check-in
           </span>
           <span className="mt-1 flex items-center gap-2">
             <CalendarDays
-              className="size-4 shrink-0 text-sage"
+              className="size-4 shrink-0 text-sage-deep"
               aria-hidden="true"
             />
             <input
@@ -109,12 +109,12 @@ export function SearchBar({
         </label>
 
         <label className={fieldClass}>
-          <span className="text-metadata font-medium text-charcoal/60">
+          <span className="text-metadata font-medium text-charcoal/75">
             Check-out
           </span>
           <span className="mt-1 flex items-center gap-2">
             <CalendarDays
-              className="size-4 shrink-0 text-sage"
+              className="size-4 shrink-0 text-sage-deep"
               aria-hidden="true"
             />
             <input
@@ -129,11 +129,11 @@ export function SearchBar({
         </label>
 
         <label className={fieldClass}>
-          <span className="text-metadata font-medium text-charcoal/60">
+          <span className="text-metadata font-medium text-charcoal/75">
             Guests
           </span>
           <span className="mt-1 flex items-center gap-2">
-            <Users className="size-4 shrink-0 text-sage" aria-hidden="true" />
+            <Users className="size-4 shrink-0 text-sage-deep" aria-hidden="true" />
             <select
               name="guests"
               value={guestsIndex}

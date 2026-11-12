@@ -58,7 +58,7 @@ export function BookingPanel({
         <h2 className="font-serif text-h3 font-semibold text-ocean">
           Your stay
         </h2>
-        <span className="text-metadata text-charcoal/55">
+        <span className="text-metadata text-charcoal/75">
           {nights} {nights === 1 ? "night" : "nights"}
         </span>
       </div>
@@ -66,7 +66,7 @@ export function BookingPanel({
       <dl className="mt-5 space-y-3 text-secondary">
         <div className="flex items-start gap-2.5">
           <CalendarDays
-            className="mt-0.5 size-4 shrink-0 text-sage"
+            className="mt-0.5 size-4 shrink-0 text-sage-deep"
             aria-hidden="true"
           />
           <div>
@@ -78,7 +78,7 @@ export function BookingPanel({
         </div>
         <div className="flex items-start gap-2.5">
           <Users
-            className="mt-0.5 size-4 shrink-0 text-sage"
+            className="mt-0.5 size-4 shrink-0 text-sage-deep"
             aria-hidden="true"
           />
           <div>
@@ -88,13 +88,13 @@ export function BookingPanel({
         </div>
         <div className="flex items-start gap-2.5">
           <Wallet
-            className="mt-0.5 size-4 shrink-0 text-sage"
+            className="mt-0.5 size-4 shrink-0 text-sage-deep"
             aria-hidden="true"
           />
           <div>
             <dt className="sr-only">Room</dt>
             <dd className="font-medium text-charcoal">{roomName}</dd>
-            <dd className="text-metadata text-charcoal/55">
+            <dd className="text-metadata text-charcoal/75">
               {formatNaira(pricePerNight)} per night
             </dd>
           </div>
@@ -107,7 +107,7 @@ export function BookingPanel({
           <span className="text-2xl font-semibold text-ocean">
             {formatNaira(total)}
           </span>
-          <p className="text-metadata text-charcoal/55">
+          <p className="text-metadata text-charcoal/75">
             Taxes and fees included
           </p>
         </div>
@@ -138,7 +138,7 @@ export function BookingPanel({
         </Button>
       )}
 
-      <div className="mt-3 space-y-2 text-metadata text-charcoal/65">
+      <div className="mt-3 space-y-2 text-metadata text-charcoal/75">
         {freeCancellationUntil ? (
           <p className="flex items-start gap-1.5">
             <ShieldCheck

@@ -84,7 +84,7 @@ export default async function CheckoutPage({ searchParams }: PageProps) {
     <div className="pb-20">
       <Container className="py-8">
         <nav aria-label="Breadcrumb">
-          <ol className="flex flex-wrap items-center gap-1.5 text-metadata text-charcoal/60">
+          <ol className="flex flex-wrap items-center gap-1.5 text-metadata text-charcoal/75">
             <li>
               <Link href="/" className="hover:text-ocean">
                 Home
@@ -110,7 +110,7 @@ export default async function CheckoutPage({ searchParams }: PageProps) {
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h1 className="text-h1 text-ocean">Confirm and pay</h1>
-            <p className="mt-2 max-w-xl text-secondary text-charcoal/65">
+            <p className="mt-2 max-w-xl text-secondary text-charcoal/75">
               One calm step to go. Your total includes all taxes and fees, and
               the cancellation deadline is shown before you pay.
             </p>

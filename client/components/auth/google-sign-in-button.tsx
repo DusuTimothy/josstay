@@ -149,12 +149,12 @@ export function GoogleSignInButton({
       <p
         role="status"
         className={cn(
-          "flex items-start gap-2 rounded-md border border-sand bg-ivory px-3.5 py-3 text-metadata text-charcoal/65",
+          "flex items-start gap-2 rounded-md border border-sand bg-ivory px-3.5 py-3 text-metadata text-charcoal/75",
           className,
         )}
       >
         <AlertCircle
-          className="mt-0.5 size-4 shrink-0 text-sage"
+          className="mt-0.5 size-4 shrink-0 text-sage-deep"
           aria-hidden="true"
         />
         {error} Please use email and password instead.

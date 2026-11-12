@@ -56,7 +56,7 @@ export function FormField({
               *
             </span>
           ) : (
-            <span className="ml-2 text-metadata font-normal text-charcoal/50">
+            <span className="ml-2 text-metadata font-normal text-charcoal/75">
               {optionalLabel}
             </span>
           )}
@@ -66,7 +66,7 @@ export function FormField({
       {error ? (
         <FieldError id={`${id}-error`}>{error}</FieldError>
       ) : hint ? (
-        <p id={`${id}-hint`} className="text-metadata text-charcoal/60">
+        <p id={`${id}-hint`} className="text-metadata text-charcoal/75">
           {hint}
         </p>
       ) : null}

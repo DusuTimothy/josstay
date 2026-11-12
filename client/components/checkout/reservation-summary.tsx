@@ -49,7 +49,7 @@ export function ReservationSummary({
         </div>
         <div className="min-w-0">
           <p className="font-semibold text-ocean">{data.hotelName}</p>
-          <p className="text-metadata text-charcoal/60">{data.hotelArea}</p>
+          <p className="text-metadata text-charcoal/75">{data.hotelArea}</p>
           <p className="mt-1.5 text-secondary text-charcoal/75">
             {data.roomName}
           </p>
@@ -58,19 +58,19 @@ export function ReservationSummary({
 
       <dl className="space-y-2.5 border-b border-sand py-4 text-secondary">
         <div className="flex justify-between gap-4">
-          <dt className="text-charcoal/60">Dates</dt>
+          <dt className="text-charcoal/75">Dates</dt>
           <dd className="text-right font-medium text-charcoal">
             {formatDateLong(data.checkIn)} – {formatDateLong(data.checkOut)}
           </dd>
         </div>
         <div className="flex justify-between gap-4">
-          <dt className="text-charcoal/60">Guests</dt>
+          <dt className="text-charcoal/75">Guests</dt>
           <dd className="text-right font-medium text-charcoal">
             {data.guestsLabel}
           </dd>
         </div>
         <div className="flex justify-between gap-4">
-          <dt className="text-charcoal/60">
+          <dt className="text-charcoal/75">
             Room · {data.nights} {data.nights === 1 ? "night" : "nights"}
           </dt>
           <dd className="text-right font-medium text-charcoal">
@@ -78,7 +78,7 @@ export function ReservationSummary({
           </dd>
         </div>
         <div className="flex justify-between gap-4">
-          <dt className="text-charcoal/60">Taxes and fees</dt>
+          <dt className="text-charcoal/75">Taxes and fees</dt>
           <dd className="text-right font-medium text-charcoal">
             {formatNaira(data.taxes)}
           </dd>
@@ -91,7 +91,7 @@ export function ReservationSummary({
           <span className="text-2xl font-semibold text-ocean">
             {formatNaira(data.total)}
           </span>
-          <p className="text-metadata text-charcoal/55">All taxes included</p>
+          <p className="text-metadata text-charcoal/75">All taxes included</p>
         </div>
       </div>
 
@@ -106,7 +106,7 @@ export function ReservationSummary({
         Confirm &amp; Pay
       </Button>
 
-      <div className="mt-4 space-y-2.5 text-metadata text-charcoal/65">
+      <div className="mt-4 space-y-2.5 text-metadata text-charcoal/75">
         {data.freeCancellationUntil ? (
           <p className="flex items-start gap-1.5">
             <Undo2 className="mt-0.5 size-3.5 shrink-0 text-success" aria-hidden="true" />
@@ -127,7 +127,7 @@ export function ReservationSummary({
         ) : null}
         <p className="flex items-start gap-1.5">
           <ShieldCheck
-            className="mt-0.5 size-3.5 shrink-0 text-sage"
+            className="mt-0.5 size-3.5 shrink-0 text-sage-deep"
             aria-hidden="true"
           />
           If the hotel cannot honour this booking, we&apos;ll make it right.

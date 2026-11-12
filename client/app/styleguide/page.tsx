@@ -35,11 +35,11 @@ export default function StyleGuidePage() {
   return (
     <Container className="space-y-14 py-12">
       <header className="border-b border-sand pb-8">
-        <p className="text-metadata font-semibold uppercase tracking-[0.16em] text-sage">
+        <p className="text-metadata font-semibold uppercase tracking-[0.16em] text-sage-deep">
           Design system
         </p>
         <h1 className="mt-2 text-h1 text-ocean">JosStay component library</h1>
-        <p className="mt-3 max-w-2xl text-body text-charcoal/65">
+        <p className="mt-3 max-w-2xl text-body text-charcoal/75">
           Every brand token and component state on one page. This route is a
           build reference — remove or protect it before launch.
         </p>
@@ -57,7 +57,7 @@ export default function StyleGuidePage() {
               >
                 {colour.name}
               </div>
-              <div className="flex items-center justify-between bg-white px-3 py-2 text-metadata text-charcoal/60">
+              <div className="flex items-center justify-between bg-white px-3 py-2 text-metadata text-charcoal/75">
                 <span>{colour.hex}</span>
                 <span>{colour.name.split(" ")[0].toLowerCase()}</span>
               </div>
@@ -82,10 +82,10 @@ export default function StyleGuidePage() {
             Body · Discover hotels designed around the way you travel. Prices
             always show whether taxes and fees are included.
           </p>
-          <p className="text-secondary text-charcoal/70">
+          <p className="text-secondary text-charcoal/75">
             Secondary · Free cancellation until 19 Nov 2026.
           </p>
-          <p className="text-metadata font-medium uppercase tracking-[0.12em] text-charcoal/60">
+          <p className="text-metadata font-medium uppercase tracking-[0.12em] text-charcoal/75">
             Metadata · 2.4 km from centre
           </p>
         </div>

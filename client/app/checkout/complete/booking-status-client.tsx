@@ -218,11 +218,11 @@ export function BookingStatusClient({ reference }: BookingStatusClientProps) {
     return (
       <Card className="mt-8">
         <CardBody
-          className="flex items-center gap-3 p-6 text-secondary text-charcoal/65 sm:p-8"
+          className="flex items-center gap-3 p-6 text-secondary text-charcoal/75 sm:p-8"
           aria-busy="true"
           aria-live="polite"
         >
-          <Loader2 className="size-5 animate-spin text-sage" aria-hidden="true" />
+          <Loader2 className="size-5 animate-spin text-sage-deep" aria-hidden="true" />
           Loading your booking…
         </CardBody>
       </Card>
@@ -273,7 +273,7 @@ export function BookingStatusClient({ reference }: BookingStatusClientProps) {
                 </h2>
                 <Badge tone={content.tone}>{content.badge}</Badge>
               </div>
-              <p className="mt-2 max-w-xl text-secondary text-charcoal/70">
+              <p className="mt-2 max-w-xl text-secondary text-charcoal/75">
                 {content.description}
               </p>
             </div>
@@ -306,11 +306,11 @@ export function BookingStatusClient({ reference }: BookingStatusClientProps) {
                   {booking.hotel.name}
                 </Link>
               </h3>
-              <p className="mt-0.5 text-secondary text-charcoal/65">
+              <p className="mt-0.5 text-secondary text-charcoal/75">
                 {booking.hotel.address}
               </p>
               {booking.room ? (
-                <p className="mt-1 text-metadata text-charcoal/60">
+                <p className="mt-1 text-metadata text-charcoal/75">
                   {booking.room.name} · {booking.room.bedType}
                 </p>
               ) : null}
@@ -320,7 +320,7 @@ export function BookingStatusClient({ reference }: BookingStatusClientProps) {
 
         <dl className="grid gap-5 border-b border-sand py-6 sm:grid-cols-2">
           <div>
-            <dt className="flex items-center gap-1.5 text-metadata text-charcoal/55">
+            <dt className="flex items-center gap-1.5 text-metadata text-charcoal/75">
               <CalendarDays className="size-3.5" aria-hidden="true" />
               Dates
             </dt>
@@ -328,30 +328,30 @@ export function BookingStatusClient({ reference }: BookingStatusClientProps) {
               {formatDateLong(booking.checkIn)} –{" "}
               {formatDateLong(booking.checkOut)}
             </dd>
-            <dd className="text-metadata text-charcoal/60">
+            <dd className="text-metadata text-charcoal/75">
               {booking.nights} {booking.nights === 1 ? "night" : "nights"}
             </dd>
           </div>
 
           <div>
-            <dt className="flex items-center gap-1.5 text-metadata text-charcoal/55">
+            <dt className="flex items-center gap-1.5 text-metadata text-charcoal/75">
               <Users className="size-3.5" aria-hidden="true" />
               Guests
             </dt>
             <dd className="mt-1 font-medium text-charcoal">
               {guestsLabel(booking.adults, booking.children)}
             </dd>
-            <dd className="text-metadata text-charcoal/60">
+            <dd className="text-metadata text-charcoal/75">
               {booking.rooms} {booking.rooms === 1 ? "room" : "rooms"}
             </dd>
           </div>
 
           <div>
-            <dt className="text-metadata text-charcoal/55">Total</dt>
+            <dt className="text-metadata text-charcoal/75">Total</dt>
             <dd className="mt-1 font-medium text-charcoal">
               {formatNaira(booking.total)}
             </dd>
-            <dd className="text-metadata text-charcoal/60">
+            <dd className="text-metadata text-charcoal/75">
               {status === "confirmed" || status === "completed"
                 ? "Paid in full"
                 : "Includes taxes and fees"}
@@ -359,17 +359,17 @@ export function BookingStatusClient({ reference }: BookingStatusClientProps) {
           </div>
 
           <div>
-            <dt className="text-metadata text-charcoal/55">Reference</dt>
+            <dt className="text-metadata text-charcoal/75">Reference</dt>
             <dd className="mt-1 select-all font-mono text-secondary font-semibold text-charcoal">
               {booking.reference}
             </dd>
-            <dd className="text-metadata text-charcoal/60">
+            <dd className="text-metadata text-charcoal/75">
               {booking.guestEmail}
             </dd>
           </div>
         </dl>
 
-        <p className="py-4 text-metadata text-charcoal/60">
+        <p className="py-4 text-metadata text-charcoal/75">
           {booking.cancellationDeadline
             ? `Free cancellation until ${formatDateLong(
                 booking.cancellationDeadline.slice(0, 10),

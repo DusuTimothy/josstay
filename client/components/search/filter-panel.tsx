@@ -71,7 +71,7 @@ export function FilterPanel({
         <button
           type="button"
           onClick={handleClear}
-          className="rounded-sm text-metadata font-medium text-charcoal/60 underline-offset-4 transition-colors hover:text-ocean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean"
+          className="rounded-sm text-metadata font-medium text-charcoal/75 underline-offset-4 transition-colors hover:text-ocean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean"
         >
           Clear all
         </button>
@@ -215,7 +215,7 @@ function FilterSection({
 }) {
   return (
     <section className="border-b border-sand py-4 last:border-b-0">
-      <h3 className="mb-3 text-metadata font-semibold uppercase tracking-[0.1em] text-charcoal/65">
+      <h3 className="mb-3 text-metadata font-semibold uppercase tracking-[0.1em] text-charcoal/75">
         {title}
       </h3>
       {children}

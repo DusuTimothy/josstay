@@ -32,13 +32,13 @@ export function ResultsHeader({
           {count.toLocaleString("en-NG")}{" "}
           {count === 1 ? "property" : "properties"} found
         </h1>
-        <p className="mt-1 text-secondary text-charcoal/60">
+        <p className="mt-1 text-secondary text-charcoal/75">
           {destination ? `Stays in ${destination}` : "Stays in Jos, Plateau State"}
           {" · "}Prices include taxes and fees
         </p>
       </div>
 
-      <label className="flex items-center gap-2 text-secondary text-charcoal/65">
+      <label className="flex items-center gap-2 text-secondary text-charcoal/75">
         <span className="shrink-0">Sort by</span>
         <Select
           value={sort}

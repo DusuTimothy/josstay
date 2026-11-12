@@ -72,7 +72,7 @@ export function Rating({
       </span>
       {showStars ? <Stars score={score} /> : null}
       {typeof reviewCount === "number" ? (
-        <span className="text-metadata text-charcoal/60">
+        <span className="text-metadata text-charcoal/75">
           ({compactNumber(reviewCount)} reviews)
         </span>
       ) : null}

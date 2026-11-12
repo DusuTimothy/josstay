@@ -31,7 +31,7 @@ export function EmptyState({
       ) : null}
       <h3 className="text-h3 text-ocean">{title}</h3>
       {description ? (
-        <p className="mt-2 max-w-md text-secondary text-charcoal/70">
+        <p className="mt-2 max-w-md text-secondary text-charcoal/75">
           {description}
         </p>
       ) : null}

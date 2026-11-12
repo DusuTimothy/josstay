@@ -282,7 +282,7 @@ in **§23 of the brand guidelines**.
 **Do first (cheap, no dependency on other steps)**
 
 - [ ] Remove the dead links: nav `Rewards` → `/rewards` (build it in step 6 or drop the link), footer `/about`, `/partners`, `/careers`, `/contact`
-- [ ] Self-host Fraunces and Inter with `next/font/local` so the brand type never silently falls back and the build no longer depends on Google Fonts
+- [x] Self-host Fraunces and Inter with `next/font/local` so the brand type never silently falls back and the build no longer depends on Google Fonts
 - [ ] Add pagination to `/search` — the API already returns `meta.total` and `page`, but the UI only ever shows the first 20 results
 - [ ] Use the existing `Skeleton` component while search and hotel detail load (nothing uses it yet)
 - [ ] Add the one reveal primitive from §23 — fade-up on scroll, no animation library, `prefers-reduced-motion` respected

@@ -30,7 +30,7 @@ export default async function BookingStatusPage({ searchParams }: PageProps) {
     <div className="pb-20">
       <Container className="py-8">
         <nav aria-label="Breadcrumb">
-          <ol className="flex flex-wrap items-center gap-1.5 text-metadata text-charcoal/60">
+          <ol className="flex flex-wrap items-center gap-1.5 text-metadata text-charcoal/75">
             <li>
               <Link href="/" className="hover:text-ocean">
                 Home
@@ -47,7 +47,7 @@ export default async function BookingStatusPage({ searchParams }: PageProps) {
 
         <div className="mt-6 max-w-2xl">
           <h1 className="text-h1 text-ocean">Your booking</h1>
-          <p className="mt-2 text-secondary text-charcoal/65">
+          <p className="mt-2 text-secondary text-charcoal/75">
             Everything about this stay in one place — reference, dates, guests
             and payment status.
           </p>

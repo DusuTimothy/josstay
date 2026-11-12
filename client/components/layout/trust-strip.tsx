@@ -70,7 +70,7 @@ export function TrustStrip({
             <Icon
               className={cn(
                 "size-5",
-                inverted ? "text-gold" : "text-sage",
+                inverted ? "text-gold" : "text-sage-deep",
               )}
               aria-hidden="true"
             />
@@ -86,7 +86,7 @@ export function TrustStrip({
               <p
                 className={cn(
                   "mt-1 text-metadata",
-                  inverted ? "text-ivory/65" : "text-charcoal/60",
+                  inverted ? "text-ivory/85" : "text-charcoal/75",
                 )}
               >
                 {description}
@@ -110,11 +110,11 @@ export function TrustStrip({
           key={title}
           className={cn(
             "flex items-center gap-2 text-secondary",
-            inverted ? "text-ivory/80" : "text-charcoal/70",
+            inverted ? "text-ivory/90" : "text-charcoal/75",
           )}
         >
           <Icon
-            className={cn("size-4", inverted ? "text-gold" : "text-sage")}
+            className={cn("size-4", inverted ? "text-gold" : "text-sage-deep")}
             aria-hidden="true"
           />
           {title}

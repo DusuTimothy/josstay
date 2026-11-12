@@ -1,21 +1,49 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { SITE } from "@/lib/constants";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
+/**
+ * The brand type ships with the app.
+ *
+ * Fraunces and Inter are variable fonts kept in `app/fonts`, so the page never
+ * depends on a font CDN, the build never needs the network, and the fallback
+ * is metric-matched (`adjustFontFallback`) so swapping to the fallback does
+ * not shift the layout.
+ */
+const inter = localFont({
+  src: [
+    {
+      path: "./fonts/Inter-Variable.woff2",
+      weight: "100 900",
+      style: "normal",
+    },
+  ],
   variable: "--font-inter",
   display: "swap",
+  fallback: ["system-ui", "Arial", "sans-serif"],
+  adjustFontFallback: "Arial",
 });
 
-const fraunces = Fraunces({
-  subsets: ["latin"],
+const fraunces = localFont({
+  src: [
+    {
+      path: "./fonts/Fraunces-Variable.woff2",
+      weight: "100 900",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Fraunces-Italic-Variable.woff2",
+      weight: "100 900",
+      style: "italic",
+    },
+  ],
   variable: "--font-fraunces",
   display: "swap",
+  fallback: ["Georgia", "Times New Roman", "serif"],
 });
 
 export const metadata: Metadata = {

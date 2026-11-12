@@ -165,7 +165,7 @@ export function CheckoutClient({ hotel, room, quote }: CheckoutClientProps) {
           </span>
           <div>
             <h2 className="text-h2 text-ocean">Your room is held</h2>
-            <p className="mt-2 max-w-xl text-secondary text-charcoal/70">
+            <p className="mt-2 max-w-xl text-secondary text-charcoal/75">
               Booking reference{" "}
               <strong className="font-semibold text-charcoal">
                 {created.booking.reference}
@@ -176,14 +176,14 @@ export function CheckoutClient({ hotel, room, quote }: CheckoutClientProps) {
 
           <dl className="grid w-full gap-3 rounded-md border border-sand bg-ivory p-4 text-secondary sm:grid-cols-3">
             <div>
-              <dt className="text-metadata text-charcoal/55">Dates</dt>
+              <dt className="text-metadata text-charcoal/75">Dates</dt>
               <dd className="font-medium text-charcoal">
                 {formatDateLong(created.booking.checkIn)} –{" "}
                 {formatDateLong(created.booking.checkOut)}
               </dd>
             </div>
             <div>
-              <dt className="text-metadata text-charcoal/55">Guests</dt>
+              <dt className="text-metadata text-charcoal/75">Guests</dt>
               <dd className="font-medium text-charcoal">
                 {guestsLabel(
                   created.booking.adults,
@@ -192,7 +192,7 @@ export function CheckoutClient({ hotel, room, quote }: CheckoutClientProps) {
               </dd>
             </div>
             <div>
-              <dt className="text-metadata text-charcoal/55">Total</dt>
+              <dt className="text-metadata text-charcoal/75">Total</dt>
               <dd className="font-medium text-charcoal">
                 {formatNaira(created.booking.total)}
               </dd>
@@ -208,7 +208,7 @@ export function CheckoutClient({ hotel, room, quote }: CheckoutClientProps) {
               Continue to payment
             </a>
           ) : (
-            <p className="max-w-xl text-secondary text-charcoal/65">
+            <p className="max-w-xl text-secondary text-charcoal/75">
               Online payment is not configured in this environment yet. Your
               booking is pending and the room is held while payment is set up.
             </p>
@@ -275,7 +275,7 @@ export function CheckoutClient({ hotel, room, quote }: CheckoutClientProps) {
           </CardBody>
         </Card>
 
-        <p className="px-1 text-metadata text-charcoal/55">
+        <p className="px-1 text-metadata text-charcoal/75">
           By confirming, you agree to the JosStay terms and the hotel&apos;s
           cancellation policy. Payment is processed securely by Paystack.
         </p>

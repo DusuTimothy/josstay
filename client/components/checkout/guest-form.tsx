@@ -24,7 +24,7 @@ export function GuestForm({
         >
           Guest information
         </h2>
-        <p className="mt-1 text-secondary text-charcoal/60">
+        <p className="mt-1 text-secondary text-charcoal/75">
           We&apos;ll send your confirmation and receipt to these details.
         </p>
       </div>

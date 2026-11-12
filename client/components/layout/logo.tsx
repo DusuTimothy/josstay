@@ -70,7 +70,7 @@ export function Logo({
           <span
             className={cn(
               "mt-1 text-[11px] font-normal tracking-wide",
-              variant === "reversed" ? "text-ivory/70" : "text-charcoal/65",
+              variant === "reversed" ? "text-ivory/85" : "text-charcoal/75",
             )}
           >
             Your city, your stay.

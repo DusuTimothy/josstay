@@ -78,7 +78,7 @@ export function AmenityList({
             key={amenity}
             className="flex items-center gap-2.5 text-secondary text-charcoal/80"
           >
-            <Icon className="size-4 shrink-0 text-sage" aria-hidden="true" />
+            <Icon className="size-4 shrink-0 text-sage-deep" aria-hidden="true" />
             <span>{AMENITIES[amenity]}</span>
           </li>
         );

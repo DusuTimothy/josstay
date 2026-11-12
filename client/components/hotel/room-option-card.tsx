@@ -44,23 +44,23 @@ export function RoomOptionCard({
         <div className="min-w-0">
           <h3 className="text-hotel font-semibold text-ocean">{room.name}</h3>
           {room.description ? (
-            <p className="mt-1 text-secondary text-charcoal/65">
+            <p className="mt-1 text-secondary text-charcoal/75">
               {room.description}
             </p>
           ) : null}
 
-          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-secondary text-charcoal/70">
+          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-secondary text-charcoal/75">
             <span className="inline-flex items-center gap-1.5">
-              <BedDouble className="size-4 text-sage" aria-hidden="true" />
+              <BedDouble className="size-4 text-sage-deep" aria-hidden="true" />
               {room.bedType}
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Users className="size-4 text-sage" aria-hidden="true" />
+              <Users className="size-4 text-sage-deep" aria-hidden="true" />
               {room.maxAdults} adults
               {room.maxChildren > 0 ? ` · ${room.maxChildren} children` : ""}
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Maximize className="size-4 text-sage" aria-hidden="true" />
+              <Maximize className="size-4 text-sage-deep" aria-hidden="true" />
               {room.sizeSqm} m²
             </span>
           </div>
@@ -94,11 +94,11 @@ export function RoomOptionCard({
         </div>
 
         <div className="shrink-0 sm:w-40 sm:text-right">
-          <p className="text-metadata text-charcoal/55">Per night</p>
+          <p className="text-metadata text-charcoal/75">Per night</p>
           <p className="text-h3 font-semibold text-ocean">
             {formatNaira(room.pricePerNight)}
           </p>
-          <p className="text-metadata text-charcoal/55">
+          <p className="text-metadata text-charcoal/75">
             {formatNaira(total)} for {Math.max(nights, 1)}{" "}
             {Math.max(nights, 1) === 1 ? "night" : "nights"}
           </p>

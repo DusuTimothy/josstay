@@ -35,7 +35,7 @@ export function Toggle({
         {description ? (
           <span
             id={descriptionId}
-            className="mt-0.5 block text-metadata text-charcoal/60"
+            className="mt-0.5 block text-metadata text-charcoal/75"
           >
             {description}
           </span>

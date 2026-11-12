@@ -13,7 +13,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       rows={rows}
       aria-invalid={invalid || undefined}
       className={cn(
-        "w-full resize-y rounded-md border border-sand bg-white px-3.5 py-3 text-body text-charcoal shadow-sm outline-none transition placeholder:text-charcoal/40 focus:border-ocean focus:ring-2 focus:ring-ocean/15 disabled:cursor-not-allowed disabled:bg-ivory",
+        "w-full resize-y rounded-md border border-sand bg-white px-3.5 py-3 text-body text-charcoal shadow-sm outline-none transition placeholder:text-charcoal/75 focus:border-ocean focus:ring-2 focus:ring-ocean/15 disabled:cursor-not-allowed disabled:bg-ivory",
         invalid && "border-error focus:border-error focus:ring-error/15",
         className,
       )}

@@ -90,7 +90,7 @@ export function HotelCard({
             <Heart
               className={cn(
                 "size-[18px] transition-colors",
-                isFavourite ? "fill-error text-error" : "text-charcoal/70",
+                isFavourite ? "fill-error text-error" : "text-charcoal/75",
               )}
               aria-hidden="true"
             />
@@ -108,7 +108,7 @@ export function HotelCard({
               {hotel.name}
             </Link>
           </h3>
-          <p className="mt-1 flex items-center gap-1.5 text-secondary text-charcoal/65">
+          <p className="mt-1 flex items-center gap-1.5 text-secondary text-charcoal/75">
             <MapPin className="size-3.5 shrink-0" aria-hidden="true" />
             {hotel.area}, {hotel.city}
             <span aria-hidden="true">·</span>
@@ -132,11 +132,11 @@ export function HotelCard({
 
         <div className="mt-auto flex items-end justify-between gap-3 pt-5">
           <div>
-            <p className="text-metadata text-charcoal/55">From</p>
+            <p className="text-metadata text-charcoal/75">From</p>
             <p className="text-h3 font-semibold leading-tight text-ocean">
               {formatNaira(hotel.pricePerNight)}
             </p>
-            <p className="text-metadata text-charcoal/55">
+            <p className="text-metadata text-charcoal/75">
               per night · taxes included
             </p>
           </div>

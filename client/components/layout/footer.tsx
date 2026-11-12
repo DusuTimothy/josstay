@@ -13,7 +13,7 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_2fr]">
           <div className="max-w-sm">
             <Logo size="md" showTagline />
-            <p className="mt-5 text-secondary text-charcoal/70">
+            <p className="mt-5 text-secondary text-charcoal/75">
               Verified hotels, clear prices and a team that knows Jos. Book with
               confidence, every time.
             </p>
@@ -25,21 +25,21 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <MessageCircle className="size-4 text-sage" aria-hidden="true" />
+                <MessageCircle className="size-4 text-sage-deep" aria-hidden="true" />
                 WhatsApp support
               </a>
               <a
                 href={`tel:${SITE.phone.replace(/\s/g, "")}`}
                 className="flex items-center gap-2.5 text-charcoal/75 transition-colors hover:text-ocean"
               >
-                <Phone className="size-4 text-sage" aria-hidden="true" />
+                <Phone className="size-4 text-sage-deep" aria-hidden="true" />
                 {SITE.phone}
               </a>
               <a
                 href={`mailto:${SITE.email}`}
                 className="flex items-center gap-2.5 text-charcoal/75 transition-colors hover:text-ocean"
               >
-                <Mail className="size-4 text-sage" aria-hidden="true" />
+                <Mail className="size-4 text-sage-deep" aria-hidden="true" />
                 {SITE.email}
               </a>
             </div>
@@ -52,7 +52,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-sand pt-6 text-metadata text-charcoal/60 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-4 border-t border-sand pt-6 text-metadata text-charcoal/75 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {SITE.name}. Made for Jos, Plateau State.
           </p>
@@ -90,7 +90,7 @@ function FooterColumn({
           <li key={link.label}>
             <Link
               href={link.href}
-              className="text-secondary text-charcoal/70 transition-colors hover:text-ocean"
+              className="text-secondary text-charcoal/75 transition-colors hover:text-ocean"
             >
               {link.label}
             </Link>

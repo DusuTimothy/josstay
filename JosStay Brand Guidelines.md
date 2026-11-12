@@ -95,6 +95,8 @@ The deck's rule: **borrow proven UX principles, not someone else's identity.**
 - Ivory is the default canvas. Deep Ocean carries authority and actions. Everything else supports.
 - Use Muted Gold sparingly. It signals premium and rewards, so overuse weakens it.
 - Keep Charcoal for text and icons to protect readability.
+- **Muted text floor (measured):** on Ivory, White and Sand, Charcoal at **75 %** is the lowest muted tone that still passes WCAG AA — 5.6:1 on Ivory, 5.9:1 on White, 5.1:1 on Sand. Below that, text must be full Charcoal. Use the brand's **Sage Deep `#3F6B58`** for icons and labels on light surfaces; plain Sage `#7F9C8D` is only 2.7–3.0:1 and fails the 3:1 rule for meaningful icons.
+- **Text over photography:** the scrim must carry the contrast, not the text colour. Deep Ocean at 85–95 % under the copy, Ivory text at 90 % or above. Never ivory at 65 % over a photo.
 - **Proposed (not in the deck):** white for card and input surfaces, a red for error states (the deck shows an error state but no value). Choose and document these before build, and test every text and background pairing for WCAG contrast.
 
 ## 6. Typography
@@ -696,6 +698,7 @@ The homepage gets **one** sticky frame telling the brand's own three-step story 
 - Nothing revealed by scrolling may be the only place a piece of information exists.
 - Touch targets stay at 44 px or more, and animated elements never shift layout while moving.
 - The price, the dates and the cancellation deadline are never animated and never sit inside a moving element.
+- Every text pairing is measured, not eyeballed — see the muted text floor and the photography rule in §5.
 
 ### Performance budget
 

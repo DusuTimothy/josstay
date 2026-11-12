@@ -17,7 +17,7 @@ export default function SignInPage() {
         <div className="mb-6 flex flex-col items-center text-center">
           <Logo size="lg" />
           <h1 className="mt-5 text-h2 text-ocean">Welcome back</h1>
-          <p className="mt-2 text-secondary text-charcoal/65">
+          <p className="mt-2 text-secondary text-charcoal/75">
             Sign in to see your bookings and plan your next stay in Jos.
           </p>
         </div>
@@ -28,8 +28,8 @@ export default function SignInPage() {
           </CardBody>
         </Card>
 
-        <p className="mt-5 flex items-center justify-center gap-2 text-metadata text-charcoal/55">
-          <ShieldCheck className="size-4 text-sage" aria-hidden="true" />
+        <p className="mt-5 flex items-center justify-center gap-2 text-metadata text-charcoal/75">
+          <ShieldCheck className="size-4 text-sage-deep" aria-hidden="true" />
           Your details are encrypted and never shared with hotels.
         </p>
       </div>

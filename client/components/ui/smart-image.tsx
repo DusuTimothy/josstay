@@ -32,7 +32,7 @@ export function SmartImage({
         role="img"
         aria-label={alt}
         className={cn(
-          "flex items-center justify-center bg-sage-soft/80 text-sage",
+          "flex items-center justify-center bg-sage-soft/80 text-sage-deep",
           fill ? "absolute inset-0" : "h-full w-full",
           className,
         )}

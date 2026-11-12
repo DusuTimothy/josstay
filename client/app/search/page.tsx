@@ -55,7 +55,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
       <section className="border-b border-sand/70 bg-white/60">
         <Container className="py-6">
           <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-1.5 text-metadata text-charcoal/60">
+            <ol className="flex items-center gap-1.5 text-metadata text-charcoal/75">
               <li>
                 <Link href="/" className="hover:text-ocean">
                   Home
