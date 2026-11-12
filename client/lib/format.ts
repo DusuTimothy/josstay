@@ -15,12 +15,23 @@ const longDate = new Intl.DateTimeFormat("en-NG", {
   year: "numeric",
 });
 
+const mediumDate = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+});
+
 export function formatNaira(amount: number): string {
   return nairaFormatter.format(Number.isFinite(amount) ? amount : 0);
 }
 
 export function formatDateShort(value: string | Date): string {
   return shortDate.format(new Date(value));
+}
+
+/** "16 Sep 2026" — the way dates read in the deck's search card. */
+export function formatDateMedium(value: string | Date): string {
+  return mediumDate.format(new Date(value));
 }
 
 export function formatDateLong(value: string | Date): string {

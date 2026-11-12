@@ -175,9 +175,9 @@ export function SearchResults({
         />
 
         {results.length > 0 ? (
-          <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-6 flex flex-col gap-4">
             {results.map((hotel) => (
-              <HotelCard key={hotel.id} hotel={hotel} />
+              <HotelCard key={hotel.id} hotel={hotel} variant="row" />
             ))}
           </div>
         ) : (

@@ -1,13 +1,12 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { SlidersHorizontal } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import {
   AMENITIES,
   DEFAULT_SEARCH_FILTERS,
   PRICE_MAX,
   PROPERTY_TYPES,
-  RATING_FILTERS,
 } from "@/lib/constants";
 import { formatNaira } from "@/lib/format";
 import type { AmenityKey, SearchFilters } from "@/lib/types";
@@ -16,6 +15,14 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select } from "@/components/ui/select";
 import { Toggle } from "@/components/ui/toggle";
+
+const RATING_OPTIONS = [
+  { value: 9, label: "9+" },
+  { value: 8, label: "8+" },
+  { value: 7, label: "7+" },
+  { value: 6, label: "6+" },
+  { value: 0, label: "Any" },
+];
 
 export interface FilterPanelProps {
   id?: string;
@@ -54,6 +61,8 @@ export function FilterPanel({
     onClear?.();
   }
 
+  const minPrice = Math.min(filters.minPrice, filters.maxPrice);
+
   return (
     <aside
       id={id}
@@ -64,10 +73,7 @@ export function FilterPanel({
       )}
     >
       <div className="flex items-center justify-between gap-3 border-b border-sand pb-4">
-        <h2 className="flex items-center gap-2 text-secondary font-semibold text-ocean">
-          <SlidersHorizontal className="size-4" aria-hidden="true" />
-          Filters
-        </h2>
+        <h2 className="text-secondary font-semibold text-ocean">Filters</h2>
         <button
           type="button"
           onClick={handleClear}
@@ -77,31 +83,26 @@ export function FilterPanel({
         </button>
       </div>
 
-      <FilterSection title="Price per night">
-        <div className="flex items-center justify-between text-secondary text-charcoal">
-          <span>{formatNaira(0)}</span>
-          <span className="font-semibold text-ocean">
+      <FilterSection title="Price range">
+        <div className="flex items-center justify-between text-metadata text-charcoal/75">
+          <span>{formatNaira(minPrice)}</span>
+          <span>
             {formatNaira(filters.maxPrice)}
             {filters.maxPrice >= PRICE_MAX ? "+" : ""}
           </span>
         </div>
-        <input
-          type="range"
-          min={0}
-          max={PRICE_MAX}
-          step={10_000}
-          value={filters.maxPrice}
-          onChange={(event) =>
-            patch({ maxPrice: Number(event.target.value) })
+        <PriceRange
+          min={minPrice}
+          max={filters.maxPrice}
+          onChange={(nextMin, nextMax) =>
+            patch({ minPrice: nextMin, maxPrice: nextMax })
           }
-          aria-label="Maximum price per night"
-          className="mt-2 w-full cursor-pointer accent-ocean"
         />
       </FilterSection>
 
       <FilterSection title="Guest rating">
         <div className="flex flex-wrap gap-1.5">
-          {RATING_FILTERS.map((option) => (
+          {RATING_OPTIONS.map((option) => (
             <button
               key={option.value}
               type="button"
@@ -120,7 +121,7 @@ export function FilterPanel({
         </div>
       </FilterSection>
 
-      <FilterSection title="Property type">
+      <CollapsibleSection title="Property type">
         <div className="space-y-2.5">
           {PROPERTY_TYPES.map((type) => (
             <Checkbox
@@ -138,9 +139,9 @@ export function FilterPanel({
             />
           ))}
         </div>
-      </FilterSection>
+      </CollapsibleSection>
 
-      <FilterSection title="Amenities">
+      <CollapsibleSection title="Amenities">
         <div className="grid grid-cols-1 gap-2.5">
           {(Object.entries(AMENITIES) as Array<[AmenityKey, string]>).map(
             ([key, label]) => (
@@ -157,26 +158,23 @@ export function FilterPanel({
             ),
           )}
         </div>
-      </FilterSection>
+      </CollapsibleSection>
 
-      <FilterSection title="Good to know">
-        <div className="space-y-4">
-          <Toggle
-            label="Breakfast included"
-            checked={filters.breakfastIncluded}
-            onCheckedChange={(checked) =>
-              patch({ breakfastIncluded: checked })
-            }
-          />
-          <Toggle
-            label="Free cancellation"
-            checked={filters.freeCancellation}
-            onCheckedChange={(checked) =>
-              patch({ freeCancellation: checked })
-            }
-          />
-        </div>
-      </FilterSection>
+      <div className="border-b border-sand py-4">
+        <Toggle
+          label="Breakfast included"
+          checked={filters.breakfastIncluded}
+          onCheckedChange={(checked) => patch({ breakfastIncluded: checked })}
+        />
+      </div>
+
+      <div className="border-b border-sand py-4">
+        <Toggle
+          label="Free cancellation"
+          checked={filters.freeCancellation}
+          onCheckedChange={(checked) => patch({ freeCancellation: checked })}
+        />
+      </div>
 
       <FilterSection title="Distance from centre">
         <Select
@@ -206,6 +204,65 @@ export function FilterPanel({
   );
 }
 
+/**
+ * Two thumbs on one track. The inputs sit on top of each other and only the
+ * thumbs take pointer events, so each end can be dragged independently.
+ */
+function PriceRange({
+  min,
+  max,
+  onChange,
+}: {
+  min: number;
+  max: number;
+  onChange: (min: number, max: number) => void;
+}) {
+  const step = 10_000;
+  const percent = (value: number) => (value / PRICE_MAX) * 100;
+
+  const thumb =
+    "pointer-events-none absolute inset-x-0 top-1/2 h-1 w-full -translate-y-1/2 appearance-none bg-transparent [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:size-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-ocean [&::-moz-range-thumb]:bg-white [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-ocean [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-soft";
+
+  return (
+    <div className="relative mt-3 h-5">
+      <div className="absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-sand" />
+      <div
+        className="absolute top-1/2 h-1 -translate-y-1/2 rounded-full bg-ocean"
+        style={{
+          left: `${percent(min)}%`,
+          right: `${100 - percent(max)}%`,
+        }}
+      />
+      <input
+        type="range"
+        min={0}
+        max={PRICE_MAX}
+        step={step}
+        value={min}
+        onChange={(event) => {
+          const value = Math.min(Number(event.target.value), max);
+          onChange(value, max);
+        }}
+        aria-label="Minimum price per night"
+        className={thumb}
+      />
+      <input
+        type="range"
+        min={0}
+        max={PRICE_MAX}
+        step={step}
+        value={max}
+        onChange={(event) => {
+          const value = Math.max(Number(event.target.value), min);
+          onChange(min, value);
+        }}
+        aria-label="Maximum price per night"
+        className={cn(thumb, "z-10")}
+      />
+    </div>
+  );
+}
+
 function FilterSection({
   title,
   children,
@@ -215,10 +272,41 @@ function FilterSection({
 }) {
   return (
     <section className="border-b border-sand py-4 last:border-b-0">
-      <h3 className="mb-3 text-metadata font-semibold uppercase tracking-[0.1em] text-charcoal/75">
+      <h3 className="mb-3 text-secondary font-semibold text-charcoal">
         {title}
       </h3>
       {children}
+    </section>
+  );
+}
+
+function CollapsibleSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <section className="border-b border-sand py-4 last:border-b-0">
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-expanded={open}
+        className="flex w-full items-center justify-between gap-2 rounded-sm text-left text-secondary font-semibold text-charcoal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean"
+      >
+        {title}
+        <ChevronDown
+          className={cn(
+            "size-4 text-charcoal/60 transition-transform",
+            open && "rotate-180",
+          )}
+          aria-hidden="true"
+        />
+      </button>
+      {open ? <div className="mt-3">{children}</div> : null}
     </section>
   );
 }

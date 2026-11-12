@@ -1,17 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import {
-  CalendarDays,
-  ShieldCheck,
-  Users,
-  Wallet,
-} from "lucide-react";
-import {
-  formatDateLong,
-  formatDateRange,
-  formatNaira,
-} from "@/lib/format";
+import { ShieldCheck } from "lucide-react";
+import { formatDateLong, formatDateRange, formatNaira } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
 
@@ -54,63 +45,34 @@ export function BookingPanel({
       )}
       aria-label="Your stay"
     >
-      <div className="flex items-baseline justify-between gap-3">
-        <h2 className="font-serif text-h3 font-semibold text-ocean">
-          Your stay
-        </h2>
-        <span className="text-metadata text-charcoal/75">
-          {nights} {nights === 1 ? "night" : "nights"}
-        </span>
-      </div>
+      <h2 className="font-serif text-h3 font-semibold text-ocean">Your stay</h2>
 
-      <dl className="mt-5 space-y-3 text-secondary">
-        <div className="flex items-start gap-2.5">
-          <CalendarDays
-            className="mt-0.5 size-4 shrink-0 text-sage-deep"
-            aria-hidden="true"
-          />
-          <div>
-            <dt className="sr-only">Dates</dt>
-            <dd className="font-medium text-charcoal">
-              {formatDateRange(checkIn, checkOut)}
-            </dd>
-          </div>
+      <dl className="mt-4 space-y-2 text-secondary text-charcoal/75">
+        <div>
+          <dt className="sr-only">Dates</dt>
+          <dd>{formatDateRange(checkIn, checkOut)}</dd>
         </div>
-        <div className="flex items-start gap-2.5">
-          <Users
-            className="mt-0.5 size-4 shrink-0 text-sage-deep"
-            aria-hidden="true"
-          />
-          <div>
-            <dt className="sr-only">Guests</dt>
-            <dd className="font-medium text-charcoal">{guestsLabel}</dd>
-          </div>
+        <div>
+          <dt className="sr-only">Guests</dt>
+          <dd>{guestsLabel}</dd>
         </div>
-        <div className="flex items-start gap-2.5">
-          <Wallet
-            className="mt-0.5 size-4 shrink-0 text-sage-deep"
-            aria-hidden="true"
-          />
-          <div>
-            <dt className="sr-only">Room</dt>
-            <dd className="font-medium text-charcoal">{roomName}</dd>
-            <dd className="text-metadata text-charcoal/75">
-              {formatNaira(pricePerNight)} per night
-            </dd>
-          </div>
+        <div>
+          <dt className="sr-only">Room</dt>
+          <dd className="font-medium text-charcoal">{roomName}</dd>
+          <dd className="text-metadata text-charcoal/75">
+            {formatNaira(pricePerNight)} per night · {nights}{" "}
+            {nights === 1 ? "night" : "nights"}
+          </dd>
         </div>
       </dl>
 
-      <div className="mt-5 flex items-baseline justify-between border-t border-sand pt-4">
-        <span className="text-secondary font-medium text-charcoal">Total</span>
-        <div className="text-right">
-          <span className="text-2xl font-semibold text-ocean">
-            {formatNaira(total)}
-          </span>
-          <p className="text-metadata text-charcoal/75">
-            Taxes and fees included
-          </p>
-        </div>
+      <div className="mt-5 border-t border-sand pt-4">
+        <p className="text-2xl font-semibold text-ocean">
+          {formatNaira(total)}
+        </p>
+        <p className="mt-1 text-metadata text-charcoal/75">
+          Taxes &amp; fees included
+        </p>
       </div>
 
       {reserveHref ? (
@@ -138,29 +100,23 @@ export function BookingPanel({
         </Button>
       )}
 
-      <div className="mt-3 space-y-2 text-metadata text-charcoal/75">
+      <div className="mt-3">
         {freeCancellationUntil ? (
-          <p className="flex items-start gap-1.5">
-            <ShieldCheck
-              className="mt-0.5 size-3.5 shrink-0 text-success"
-              aria-hidden="true"
-            />
-            Free cancellation until{" "}
-            <strong className="font-semibold text-charcoal">
-              {formatDateLong(freeCancellationUntil)}
-            </strong>
+          <p className="inline-flex items-center gap-1.5 rounded-full bg-sage-soft px-3 py-1.5 text-metadata font-medium text-success">
+            <ShieldCheck className="size-3.5 shrink-0" aria-hidden="true" />
+            Free cancellation until {formatDateLong(freeCancellationUntil)}
           </p>
         ) : (
-          <p className="flex items-start gap-1.5">
-            <ShieldCheck
-              className="mt-0.5 size-3.5 shrink-0 text-success"
-              aria-hidden="true"
-            />
-            Cancellation terms are shown before payment.
+          <p className="inline-flex items-center gap-1.5 rounded-full bg-sage-soft px-3 py-1.5 text-metadata font-medium text-success">
+            <ShieldCheck className="size-3.5 shrink-0" aria-hidden="true" />
+            Cancellation terms shown before payment
           </p>
         )}
-        <p>You won&apos;t be charged yet.</p>
       </div>
+
+      <p className="mt-2.5 text-metadata text-charcoal/75">
+        You won&apos;t be charged yet.
+      </p>
     </aside>
   );
 }

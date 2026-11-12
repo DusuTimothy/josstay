@@ -140,13 +140,6 @@ export const SORT_OPTIONS: { value: SortOption; label: string }[] = [
   { value: "rating", label: "Guest rating" },
 ];
 
-export const RATING_FILTERS = [
-  { value: 0, label: "Any rating" },
-  { value: 8, label: "8+ Excellent" },
-  { value: 7, label: "7+ Very good" },
-  { value: 6, label: "6+ Good" },
-] as const;
-
 export const PRICE_MAX = 500_000;
 
 export const DEFAULT_SEARCH_FILTERS: SearchFilters = {

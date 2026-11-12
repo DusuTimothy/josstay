@@ -39,7 +39,7 @@ export function Header({ className }: { className?: string }) {
             href="/sign-in"
             className={cn(
               buttonVariants({ variant: "ghost", size: "sm" }),
-              "border-transparent",
+              "border-sand",
             )}
           >
             Sign in

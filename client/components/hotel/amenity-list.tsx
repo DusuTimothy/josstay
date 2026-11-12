@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import {
+  Check,
   Coffee,
   Droplets,
   Dumbbell,
@@ -39,7 +40,7 @@ const AMENITY_ICONS: Record<AmenityKey, LucideIcon> = {
 
 export interface AmenityListProps {
   amenities: AmenityKey[];
-  variant?: "list" | "chips";
+  variant?: "list" | "chips" | "row";
   limit?: number;
   className?: string;
 }
@@ -57,9 +58,34 @@ export function AmenityList({
       <ul className={cn("flex flex-wrap gap-1.5", className)}>
         {visible.map((amenity) => (
           <li key={amenity}>
-            <Chip tone="outline">{AMENITIES[amenity]}</Chip>
+            <Chip tone="sage">
+              <Check className="size-3" aria-hidden="true" />
+              {AMENITIES[amenity]}
+            </Chip>
           </li>
         ))}
+      </ul>
+    );
+  }
+
+  if (variant === "row") {
+    return (
+      <ul className={cn("flex flex-wrap items-center gap-x-5 gap-y-2", className)}>
+        {visible.map((amenity) => {
+          const Icon = AMENITY_ICONS[amenity];
+          return (
+            <li
+              key={amenity}
+              className="inline-flex items-center gap-1.5 text-secondary text-charcoal/80"
+            >
+              <Icon
+                className="size-4 shrink-0 text-sage-deep"
+                aria-hidden="true"
+              />
+              <span>{AMENITIES[amenity]}</span>
+            </li>
+          );
+        })}
       </ul>
     );
   }

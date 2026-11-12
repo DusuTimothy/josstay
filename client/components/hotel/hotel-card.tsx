@@ -26,6 +26,12 @@ export interface HotelCardProps {
   href?: string;
   isFavourite?: boolean;
   onToggleFavourite?: (hotel: HotelSummary) => void;
+  /**
+   * `row` is the horizontal listing the deck uses on search results:
+   * photo on the left, details in the middle, price and action on the
+   * right. `tile` is the vertical card used in grids.
+   */
+  variant?: "row" | "tile";
   className?: string;
 }
 
@@ -34,12 +40,145 @@ export function HotelCard({
   href = `/hotels/${hotel.slug}`,
   isFavourite = false,
   onToggleFavourite,
+  variant = "tile",
   className,
 }: HotelCardProps) {
   function handleFavourite(event: MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     event.stopPropagation();
     onToggleFavourite?.(hotel);
+  }
+
+  const photo = (
+    <div
+      className={cn(
+        "relative overflow-hidden bg-sand",
+        variant === "row"
+          ? "aspect-[4/3] w-28 shrink-0 rounded-md sm:w-48 lg:w-64"
+          : "aspect-[4/3]",
+      )}
+    >
+      <Link
+        href={href}
+        aria-label={`View ${hotel.name}`}
+        className="absolute inset-0 z-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ocean"
+      >
+        <SmartImage
+          src={hotel.imageUrl}
+          alt={hotel.imageAlt ?? hotel.name}
+          fill
+          sizes={
+            variant === "row"
+              ? "(min-width: 1024px) 256px, (min-width: 640px) 192px, 112px"
+              : "(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+          }
+          className="object-cover transition-transform duration-500 ease-calm group-hover:scale-[1.03]"
+        />
+      </Link>
+
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 bg-gradient-to-b from-charcoal/35 via-charcoal/5 to-transparent p-3">
+        <div className="pointer-events-auto flex flex-wrap gap-1.5">
+          {hotel.badges?.map((badge) => (
+            <Badge
+              key={badge}
+              tone={BADGE_COPY[badge].tone}
+              className="shadow-soft"
+            >
+              {BADGE_COPY[badge].label}
+            </Badge>
+          ))}
+        </div>
+        <button
+          type="button"
+          onClick={handleFavourite}
+          aria-pressed={isFavourite}
+          aria-label={
+            isFavourite
+              ? `Remove ${hotel.name} from favourites`
+              : `Save ${hotel.name} to favourites`
+          }
+          className="pointer-events-auto grid size-9 shrink-0 place-items-center rounded-full bg-white/95 text-charcoal shadow-soft backdrop-blur transition hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+        >
+          <Heart
+            className={cn(
+              "size-[18px] transition-colors",
+              isFavourite ? "fill-error text-error" : "text-charcoal/75",
+            )}
+            aria-hidden="true"
+          />
+        </button>
+      </div>
+    </div>
+  );
+
+  const heading = (
+    <h3 className="text-hotel font-semibold text-charcoal">
+      <Link
+        href={href}
+        className="rounded-sm transition-colors hover:text-ocean focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+      >
+        {hotel.name}
+      </Link>
+    </h3>
+  );
+
+  const meta = (
+    <p className="mt-1 flex flex-wrap items-center gap-x-1.5 text-secondary text-charcoal/75">
+      <MapPin className="size-3.5 shrink-0" aria-hidden="true" />
+      {hotel.area}, {hotel.city}
+      <span aria-hidden="true">·</span>
+      <span>{hotel.distanceKm.toFixed(1)} km from centre</span>
+    </p>
+  );
+
+  if (variant === "row") {
+    return (
+      <article
+        className={cn(
+          "group flex gap-4 rounded-lg border border-sand bg-white p-3 shadow-soft transition-shadow duration-300 hover:shadow-medium",
+          className,
+        )}
+      >
+        {photo}
+
+        <div className="flex min-w-0 flex-1 flex-col justify-center gap-2.5 py-1">
+          {heading}
+          {meta}
+
+          <Rating
+            score={hotel.rating}
+            reviewCount={hotel.reviewCount}
+            size="sm"
+            className="mt-0.5"
+          />
+
+          <AmenityList
+            amenities={hotel.amenities}
+            variant="chips"
+            limit={3}
+            className="mt-0.5"
+          />
+        </div>
+
+        <div className="flex shrink-0 flex-col items-end justify-center gap-1 py-1 text-right">
+          <p className="text-h3 font-semibold leading-tight text-ocean">
+            {formatNaira(hotel.pricePerNight)}
+          </p>
+          <p className="text-metadata text-charcoal/75">per night</p>
+          <p className="text-metadata text-charcoal/75">Taxes included</p>
+
+          <Link
+            href={href}
+            className={cn(
+              buttonVariants({ variant: "primary", size: "sm" }),
+              "mt-2",
+            )}
+          >
+            View rooms
+          </Link>
+        </div>
+      </article>
+    );
   }
 
   return (
@@ -49,71 +188,12 @@ export function HotelCard({
         className,
       )}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-sand">
-        <Link
-          href={href}
-          aria-label={`View ${hotel.name}`}
-          className="absolute inset-0 z-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ocean"
-        >
-          <SmartImage
-            src={hotel.imageUrl}
-            alt={hotel.imageAlt ?? hotel.name}
-            fill
-            sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-            className="object-cover transition-transform duration-500 ease-calm group-hover:scale-[1.03]"
-          />
-        </Link>
-
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 bg-gradient-to-b from-charcoal/35 via-charcoal/5 to-transparent p-3">
-          <div className="pointer-events-auto flex flex-wrap gap-1.5">
-            {hotel.badges?.map((badge) => (
-              <Badge
-                key={badge}
-                tone={BADGE_COPY[badge].tone}
-                className="shadow-soft"
-              >
-                {BADGE_COPY[badge].label}
-              </Badge>
-            ))}
-          </div>
-          <button
-            type="button"
-            onClick={handleFavourite}
-            aria-pressed={isFavourite}
-            aria-label={
-              isFavourite
-                ? `Remove ${hotel.name} from favourites`
-                : `Save ${hotel.name} to favourites`
-            }
-            className="pointer-events-auto grid size-9 shrink-0 place-items-center rounded-full bg-white/95 text-charcoal shadow-soft backdrop-blur transition hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-          >
-            <Heart
-              className={cn(
-                "size-[18px] transition-colors",
-                isFavourite ? "fill-error text-error" : "text-charcoal/75",
-              )}
-              aria-hidden="true"
-            />
-          </button>
-        </div>
-      </div>
+      {photo}
 
       <div className="flex flex-1 flex-col p-5">
         <div>
-          <h3 className="text-hotel font-semibold text-ocean">
-            <Link
-              href={href}
-              className="rounded-sm transition-colors hover:text-ocean/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-            >
-              {hotel.name}
-            </Link>
-          </h3>
-          <p className="mt-1 flex items-center gap-1.5 text-secondary text-charcoal/75">
-            <MapPin className="size-3.5 shrink-0" aria-hidden="true" />
-            {hotel.area}, {hotel.city}
-            <span aria-hidden="true">·</span>
-            <span>{hotel.distanceKm.toFixed(1)} km from centre</span>
-          </p>
+          {heading}
+          {meta}
         </div>
 
         <Rating

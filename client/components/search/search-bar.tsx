@@ -2,12 +2,13 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { CalendarDays, MapPin, Search, Users } from "lucide-react";
+import { ChevronDown, Search } from "lucide-react";
 import { GUEST_OPTIONS } from "@/lib/constants";
 import { todayISO } from "@/lib/format";
 import type { SearchValues } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { DateField } from "./date-field";
 
 export interface SearchBarProps {
   defaultDestination?: string;
@@ -58,7 +59,7 @@ export function SearchBar({
   }
 
   const fieldClass =
-    "flex flex-col justify-center rounded-md border border-transparent px-3 py-2 transition-colors hover:border-sand focus-within:border-sand focus-within:bg-white";
+    "flex flex-col justify-center rounded-md px-3 py-2 transition-colors hover:bg-sage-soft/40 focus-within:bg-sage-soft/40 md:border-r md:border-sand/70 md:last:border-r-0";
 
   return (
     <form
@@ -69,76 +70,60 @@ export function SearchBar({
         className,
       )}
     >
-      <div className="grid gap-1 md:grid-cols-[1.5fr_1fr_1fr_0.9fr_auto] md:items-stretch">
+      <div className="grid gap-1 md:grid-cols-[1.4fr_1fr_1fr_0.9fr_auto] md:items-stretch">
         <label className={fieldClass}>
-          <span className="text-metadata font-medium text-charcoal/75">
-            Where are you going?
+          <span className="block text-metadata font-semibold text-charcoal">
+            Destination
           </span>
-          <span className="mt-1 flex items-center gap-2">
-            <MapPin className="size-4 shrink-0 text-sage-deep" aria-hidden="true" />
-            <input
-              type="text"
-              name="destination"
-              value={destination}
-              onChange={(event) => setDestination(event.target.value)}
-              placeholder="Jos, Nigeria"
-              autoComplete="off"
-              className="min-w-0 w-full bg-transparent text-secondary font-medium text-charcoal outline-none placeholder:text-charcoal/75"
-            />
-          </span>
+          <input
+            type="text"
+            name="destination"
+            value={destination}
+            onChange={(event) => setDestination(event.target.value)}
+            placeholder="Where are you going?"
+            autoComplete="off"
+            className="mt-0.5 w-full min-w-0 bg-transparent text-secondary font-semibold text-charcoal outline-none placeholder:font-normal placeholder:text-charcoal/60"
+          />
         </label>
 
-        <label className={fieldClass}>
-          <span className="text-metadata font-medium text-charcoal/75">
+        <div className={fieldClass}>
+          <span className="block text-metadata font-semibold text-charcoal">
             Check-in
           </span>
-          <span className="mt-1 flex items-center gap-2">
-            <CalendarDays
-              className="size-4 shrink-0 text-sage-deep"
-              aria-hidden="true"
-            />
-            <input
-              type="date"
-              name="checkIn"
-              value={checkIn}
-              min={todayISO()}
-              onChange={(event) => setCheckIn(event.target.value)}
-              className="min-w-0 w-full bg-transparent text-secondary font-medium text-charcoal outline-none"
-            />
-          </span>
-        </label>
+          <DateField
+            id="search-check-in"
+            name="checkIn"
+            value={checkIn}
+            min={todayISO()}
+            onChange={setCheckIn}
+            className="mt-0.5"
+          />
+        </div>
 
-        <label className={fieldClass}>
-          <span className="text-metadata font-medium text-charcoal/75">
+        <div className={fieldClass}>
+          <span className="block text-metadata font-semibold text-charcoal">
             Check-out
           </span>
-          <span className="mt-1 flex items-center gap-2">
-            <CalendarDays
-              className="size-4 shrink-0 text-sage-deep"
-              aria-hidden="true"
-            />
-            <input
-              type="date"
-              name="checkOut"
-              value={checkOut}
-              min={checkIn || todayISO()}
-              onChange={(event) => setCheckOut(event.target.value)}
-              className="min-w-0 w-full bg-transparent text-secondary font-medium text-charcoal outline-none"
-            />
-          </span>
-        </label>
+          <DateField
+            id="search-check-out"
+            name="checkOut"
+            value={checkOut}
+            min={checkIn || todayISO()}
+            onChange={setCheckOut}
+            className="mt-0.5"
+          />
+        </div>
 
-        <label className={fieldClass}>
-          <span className="text-metadata font-medium text-charcoal/75">
+        <div className={fieldClass}>
+          <span className="block text-metadata font-semibold text-charcoal">
             Guests
           </span>
-          <span className="mt-1 flex items-center gap-2">
-            <Users className="size-4 shrink-0 text-sage-deep" aria-hidden="true" />
+          <div className="relative mt-0.5 flex items-center">
             <select
               name="guests"
               value={guestsIndex}
               onChange={(event) => setGuestsIndex(Number(event.target.value))}
-              className="min-w-0 w-full appearance-none bg-transparent text-secondary font-medium text-charcoal outline-none"
+              className="w-full min-w-0 appearance-none bg-transparent pr-6 text-secondary font-semibold text-charcoal outline-none"
             >
               {GUEST_OPTIONS.map((option, index) => (
                 <option key={option.label} value={index}>
@@ -146,8 +131,12 @@ export function SearchBar({
                 </option>
               ))}
             </select>
-          </span>
-        </label>
+            <ChevronDown
+              className="pointer-events-none absolute right-0 size-4 text-charcoal/50"
+              aria-hidden="true"
+            />
+          </div>
+        </div>
 
         <Button
           type="submit"

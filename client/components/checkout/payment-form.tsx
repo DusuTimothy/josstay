@@ -1,4 +1,4 @@
-import { CreditCard, LockKeyhole, ShieldCheck } from "lucide-react";
+import { ChevronDown, LockKeyhole, ShieldCheck } from "lucide-react";
 import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
 
@@ -48,18 +48,31 @@ export function PaymentForm({
               name="cardNumber"
               inputMode="numeric"
               autoComplete="cc-number"
-              placeholder="0000 0000 0000 0000"
+              placeholder="4242 4343 4342 4342"
               invalid={Boolean(errors?.cardNumber)}
               aria-describedby={
                 errors?.cardNumber ? "cardNumber-error" : undefined
               }
               disabled={disabled}
-              className="pl-10"
+              className="pr-28"
             />
-            <CreditCard
-              className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-charcoal/35"
-              aria-hidden="true"
-            />
+            <label className="pointer-events-none absolute right-2 top-1/2 flex -translate-y-1/2 items-center">
+              <span className="sr-only">Card brand</span>
+              <select
+                name="cardBrand"
+                defaultValue="visa"
+                disabled={disabled}
+                className="pointer-events-auto cursor-pointer appearance-none rounded-sm bg-transparent py-1 pl-2 pr-6 text-metadata font-semibold text-charcoal/75 outline-none"
+              >
+                <option value="visa">VISA</option>
+                <option value="mastercard">Mastercard</option>
+                <option value="verve">VERVE</option>
+              </select>
+              <ChevronDown
+                className="pointer-events-none absolute right-1 size-3.5 text-charcoal/50"
+                aria-hidden="true"
+              />
+            </label>
           </div>
         </FormField>
 

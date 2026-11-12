@@ -56,29 +56,24 @@ export function ReservationSummary({
         </div>
       </div>
 
+      <div className="border-b border-sand py-4">
+        <p className="text-secondary text-charcoal/75">
+          {formatDateLong(data.checkIn)} – {formatDateLong(data.checkOut)} ·{" "}
+          {data.guestsLabel}
+        </p>
+      </div>
+
       <dl className="space-y-2.5 border-b border-sand py-4 text-secondary">
         <div className="flex justify-between gap-4">
-          <dt className="text-charcoal/75">Dates</dt>
-          <dd className="text-right font-medium text-charcoal">
-            {formatDateLong(data.checkIn)} – {formatDateLong(data.checkOut)}
-          </dd>
-        </div>
-        <div className="flex justify-between gap-4">
-          <dt className="text-charcoal/75">Guests</dt>
-          <dd className="text-right font-medium text-charcoal">
-            {data.guestsLabel}
-          </dd>
-        </div>
-        <div className="flex justify-between gap-4">
           <dt className="text-charcoal/75">
-            Room · {data.nights} {data.nights === 1 ? "night" : "nights"}
+            Room ({data.nights} {data.nights === 1 ? "night" : "nights"})
           </dt>
           <dd className="text-right font-medium text-charcoal">
             {formatNaira(data.roomTotal)}
           </dd>
         </div>
         <div className="flex justify-between gap-4">
-          <dt className="text-charcoal/75">Taxes and fees</dt>
+          <dt className="text-charcoal/75">Taxes &amp; fees</dt>
           <dd className="text-right font-medium text-charcoal">
             {formatNaira(data.taxes)}
           </dd>
@@ -87,26 +82,12 @@ export function ReservationSummary({
 
       <div className="flex items-baseline justify-between gap-4 py-4">
         <span className="text-secondary font-semibold text-charcoal">Total</span>
-        <div className="text-right">
-          <span className="text-2xl font-semibold text-ocean">
-            {formatNaira(data.total)}
-          </span>
-          <p className="text-metadata text-charcoal/75">All taxes included</p>
-        </div>
+        <span className="text-2xl font-semibold text-ocean">
+          {formatNaira(data.total)}
+        </span>
       </div>
 
-      <Button
-        type="button"
-        fullWidth
-        size="lg"
-        onClick={onConfirm}
-        isLoading={isProcessing}
-      >
-        <LockKeyhole aria-hidden="true" />
-        Confirm &amp; Pay
-      </Button>
-
-      <div className="mt-4 space-y-2.5 text-metadata text-charcoal/75">
+      <div className="space-y-2.5 pb-4 text-metadata text-charcoal/75">
         {data.freeCancellationUntil ? (
           <p className="flex items-start gap-1.5">
             <Undo2 className="mt-0.5 size-3.5 shrink-0 text-success" aria-hidden="true" />
@@ -122,17 +103,26 @@ export function ReservationSummary({
               className="mt-0.5 size-3.5 shrink-0 text-success"
               aria-hidden="true"
             />
-            Instant confirmation by email and WhatsApp.
+            Instant confirmation.
           </p>
         ) : null}
-        <p className="flex items-start gap-1.5">
-          <ShieldCheck
-            className="mt-0.5 size-3.5 shrink-0 text-sage-deep"
-            aria-hidden="true"
-          />
-          If the hotel cannot honour this booking, we&apos;ll make it right.
-        </p>
       </div>
+
+      <Button
+        type="button"
+        fullWidth
+        size="lg"
+        onClick={onConfirm}
+        isLoading={isProcessing}
+      >
+        <LockKeyhole aria-hidden="true" />
+        Confirm &amp; Pay
+      </Button>
+
+      <p className="mt-3 flex items-center justify-center gap-1.5 text-metadata text-charcoal/75">
+        <ShieldCheck className="size-3.5 text-sage-deep" aria-hidden="true" />
+        Secure payment
+      </p>
     </aside>
   );
 }

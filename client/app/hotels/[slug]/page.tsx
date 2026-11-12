@@ -114,7 +114,7 @@ export default async function HotelDetailPage({
 
                 <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-secondary text-charcoal/75">
                   <MapPin className="size-4 shrink-0" aria-hidden="true" />
-                  {hotel.address}
+                  {hotel.area}, {hotel.city}
                 </p>
 
                 <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -127,6 +127,12 @@ export default async function HotelDetailPage({
                     {hotel.distanceKm.toFixed(1)} km from the city centre
                   </span>
                 </div>
+
+                <AmenityList
+                  amenities={hotel.amenities}
+                  variant="row"
+                  className="mt-4"
+                />
               </header>
 
               <section

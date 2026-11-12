@@ -41,30 +41,45 @@ export interface RatingProps {
   className?: string;
 }
 
+/**
+ * A gold star, the score, the descriptor and the review count — the order
+ * the deck uses on every listing.
+ */
 export function Rating({
   score,
   reviewCount,
   label,
-  showStars = true,
+  showStars = false,
   size = "md",
   className,
 }: RatingProps) {
   const descriptor = label ?? ratingLabel(score);
 
   return (
-    <div className={cn("flex flex-wrap items-center gap-x-2 gap-y-1", className)}>
+    <div
+      className={cn(
+        "flex flex-wrap items-center gap-x-1.5 gap-y-1",
+        className,
+      )}
+    >
+      <Star
+        className={cn(
+          "fill-gold text-gold",
+          size === "sm" ? "size-3.5" : "size-4",
+        )}
+        aria-hidden="true"
+      />
       <span
         className={cn(
-          "inline-flex items-center justify-center rounded-md bg-sage font-semibold text-white",
-          size === "sm" ? "min-w-8 px-1.5 py-0.5 text-xs" : "min-w-9 px-2 py-1 text-sm",
+          "font-semibold text-charcoal",
+          size === "sm" ? "text-metadata" : "text-secondary",
         )}
-        aria-label={`Guest score ${score.toFixed(1)} out of 10`}
       >
         {score.toFixed(1)}
       </span>
       <span
         className={cn(
-          "font-medium text-ocean",
+          "text-charcoal/75",
           size === "sm" ? "text-metadata" : "text-secondary",
         )}
       >

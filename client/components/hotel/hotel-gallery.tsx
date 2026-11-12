@@ -23,7 +23,7 @@ export function HotelGallery({
   const current = images[Math.min(active, images.length - 1)];
 
   return (
-    <div className={cn("space-y-3", className)}>
+    <div className={cn("relative", className)}>
       <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-sand">
         <SmartImage
           src={current.url}
@@ -37,7 +37,7 @@ export function HotelGallery({
 
       {images.length > 1 ? (
         <div
-          className="flex gap-2 overflow-x-auto pb-1"
+          className="absolute bottom-3 left-3 flex gap-2"
           role="group"
           aria-label={`${hotelName} photo gallery`}
         >
@@ -49,17 +49,17 @@ export function HotelGallery({
               aria-label={`View photo ${index + 1} of ${images.length}`}
               aria-current={index === active}
               className={cn(
-                "relative aspect-[4/3] w-20 shrink-0 overflow-hidden rounded-md border-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean focus-visible:ring-offset-2 focus-visible:ring-offset-ivory sm:w-24",
+                "relative aspect-[4/3] w-16 shrink-0 overflow-hidden rounded-md border-2 shadow-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean focus-visible:ring-offset-2 focus-visible:ring-offset-ivory sm:w-20",
                 index === active
-                  ? "border-ocean"
-                  : "border-transparent opacity-75 hover:opacity-100",
+                  ? "border-ivory"
+                  : "border-ivory/40 opacity-80 hover:opacity-100",
               )}
             >
               <SmartImage
                 src={image.url}
                 alt=""
                 fill
-                sizes="96px"
+                sizes="80px"
                 className="object-cover"
               />
             </button>

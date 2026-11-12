@@ -67,7 +67,10 @@ const config: Config = {
         ],
         body: ["1rem", { lineHeight: "1.6" }],
         secondary: ["0.875rem", { lineHeight: "1.5" }],
-        metadata: ["0.75rem", { lineHeight: "1.4", letterSpacing: "0.01em" }],
+        metadata: [
+          "0.75rem",
+          { lineHeight: "1.4", letterSpacing: "0.01em", fontWeight: "500" },
+        ],
         button: ["0.9375rem", { lineHeight: "1.25", fontWeight: "600" }],
       },
       spacing: {
