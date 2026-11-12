@@ -628,3 +628,82 @@ A map pin with a doorway cut into it and a small gold light in the doorway. The 
 - The wordmark uses live Fraunces text on the board and the tagline uses Inter. Before production, convert it to outlines so it looks identical everywhere, and export the final SVG and PNG files.
 - Test the pin at 16 px for the favicon.
 - CAC name registration and trademark checks: to be handled at production.
+
+
+## 23. Motion and Art Direction
+
+Status: **Proposed** addendum, November 2026. Written after reviewing a high-craft fintech site (tokkenly.com) to extract principles rather than identity, per §4 Benchmarks: "borrow proven UX principles, not someone else's identity."
+
+### The principle
+
+Motion must advance **Discover → Compare → Commit** (§3). If an animation does not help a guest understand, decide or trust, it is decoration and it is removed.
+
+JosStay should feel like a well-made guesthouse: calm, editorial, generous whitespace. The rules below are a floor, not a ceiling.
+
+### Motion budget
+
+| Surface | Motion allowed | Not allowed |
+| --- | --- | --- |
+| Home hero | One fade-up on load | Delaying or obscuring the search bar |
+| Home scroll story | Sticky frame with a changing step | Scroll hijacking, scroll snapping |
+| Hotel detail | Fade-up for section headings; one pulse on live availability | Animating price, dates or availability text |
+| Search results | Filter chip transitions | Anything that delays the result list |
+| Checkout | Button state and total change | Animating money, dates or the cancellation deadline |
+| Toasts, dialogs | Fade or slide, 150–200 ms | Loops, parallax |
+
+### The one reveal primitive
+
+A single recipe, used everywhere, CSS-first:
+
+| Property | Value |
+| --- | --- |
+| Trigger | `IntersectionObserver`, once, at 15–20 % visible |
+| Transform | `translateY(8px)` → `0` |
+| Opacity | `0` → `1` |
+| Duration | 300–400 ms |
+| Easing | `cubic-bezier(0.22, 1, 0.36, 1)` (the `calm` token) |
+| Stagger | 60–80 ms between siblings, four items maximum |
+| Never | blur, scale, rotation, parallax |
+
+One small client component using the platform `IntersectionObserver` to toggle a class. **No animation library** for this. With `prefers-reduced-motion: reduce`, render the final state and no transition.
+
+### Ambient loops
+
+At most one per page, and only where it means "live": availability, a pending payment, a live rate. A loop must be slow (three seconds or more), low contrast, and pause when scrolled out of view. Never loop over photography, over a form, or next to the price.
+
+### The scroll story
+
+The homepage gets **one** sticky frame telling the brand's own three-step story — Discover, Compare, Commit — with a single sentence and one photograph per step. Sticky height around 80 vh, the step changes as the guest scrolls, native scrolling only.
+
+### Art direction: what to borrow
+
+1. **Self-hosted fonts.** Variable woff2 files in the repository, loaded with `next/font/local`, plus a metric-matched local fallback (`size-adjust`, `ascent-override`). The brand type must never depend on a font CDN, and the fallback must not shift the layout.
+2. **Quiet depth.** Soft shadow, a hairline ring in Sand at low opacity, and one blurred warm glow behind hero imagery. One glow per surface, never two.
+3. **Texture.** A light grain overlay (6 % opacity or less) over large brand panels. It is what makes a flat block feel like paper instead of a div.
+4. **Honest imagery.** Real hotel photography and real product screenshots, never generic stock. The placeholder photos in `client/public/images/photos` are a launch blocker, not a look.
+
+### Art direction: what to refuse
+
+1. **A dark neon identity.** JosStay is ivory, sand and ocean. No lime or "volt" accent, no dark-first marketing pages.
+2. **Scroll hijacking** (Lenis-style inertia). It breaks scroll predictability and keyboard navigation, and §12 asks for minimal JavaScript.
+3. **A motion library** for a handful of effects. `motion` (Framer Motion) is only justified if the scroll story needs shared layout transitions.
+4. **Motion on money, dates or availability.** Those must appear instantly and stay readable.
+5. **Decorative motion** anywhere on the transactional path: search, hotel detail, checkout, payment.
+
+### Accessibility rules
+
+- `prefers-reduced-motion: reduce` means no transitions, no loops and no sticky pinning.
+- Nothing revealed by scrolling may be the only place a piece of information exists.
+- Touch targets stay at 44 px or more, and animated elements never shift layout while moving.
+- The price, the dates and the cancellation deadline are never animated and never sit inside a moving element.
+
+### Performance budget
+
+- Motion must not add a client-side dependency larger than 5 KB gzipped.
+- Prefer CSS transitions and keyframes; JavaScript only toggles a class.
+- Every page still works with JavaScript disabled — search, checkout and sign-in stay server-rendered and progressively enhanced.
+
+### Open
+
+- Whether the hotel detail page wants a sticky gallery, or whether one gallery and one sticky summary is enough.
+- Whether the scroll story ships at launch, or waits for real hotel photography to carry it.

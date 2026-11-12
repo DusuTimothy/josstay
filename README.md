@@ -276,7 +276,8 @@ None of these should block the first real booking.
 
 The numbered steps above are ordered by revenue path. This one is the craft
 that makes the site feel finished rather than generic — it lives here so it
-does not get lost between sessions.
+does not get lost between sessions. The rules for motion and art direction are
+in **§23 of the brand guidelines**.
 
 **Do first (cheap, no dependency on other steps)**
 
@@ -284,6 +285,7 @@ does not get lost between sessions.
 - [ ] Self-host Fraunces and Inter with `next/font/local` so the brand type never silently falls back and the build no longer depends on Google Fonts
 - [ ] Add pagination to `/search` — the API already returns `meta.total` and `page`, but the UI only ever shows the first 20 results
 - [ ] Use the existing `Skeleton` component while search and hotel detail load (nothing uses it yet)
+- [ ] Add the one reveal primitive from §23 — fade-up on scroll, no animation library, `prefers-reduced-motion` respected
 
 **Do together with step 5 (Paystack)**
 
@@ -296,6 +298,7 @@ does not get lost between sessions.
 - [ ] Google Maps embed, pin and directions link on the hotel page — `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` is currently unused
 - [ ] Guest reviews on the hotel page (step 6 builds the moderation side)
 - [ ] `/rewards` page for the referral programme (step 6)
+- [ ] Homepage scroll story — one sticky frame telling Discover → Compare → Commit (§23)
 
 **Done when:** every link in the header and footer resolves, the search page
 can reach every result, and no page shows an empty frame while it waits for

@@ -163,6 +163,7 @@ available rooms =
 | Manager, front desk, admin dashboards | Not built |
 | Reviews, referrals, payouts | Not built |
 | UI polish (README step 7) | Backlog: dead links, self-hosted fonts, search pagination, loading skeletons, signed-in header state, map, guest reviews |
+| Motion and art direction | Rules written in §23 of the brand guidelines; reveal primitive and scroll story not built yet |
 | JSON-LD | Done for Organization, WebSite and hotel pages |
 | Seed data | 5 placeholder hotels, 10 rooms, demo manager/admin accounts |
 
