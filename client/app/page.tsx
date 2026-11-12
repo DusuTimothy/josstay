@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { ArrowRight, Building2, Check } from "lucide-react";
 import { SearchBar } from "@/components/search/search-bar";
@@ -26,52 +27,58 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-sand/60">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(120%_100%_at_50%_0%,#DCE7E0_0%,#F7F4ED_52%,#F7F4ED_100%)]"
+      <section className="relative isolate overflow-hidden">
+        <Image
+          src="/images/hero/hero-jos.jpg"
+          alt="A lit hotel pool at blue hour in Jos"
+          fill
+          priority
+          sizes="100vw"
+          className="-z-10 object-cover object-center"
         />
         <div
           aria-hidden="true"
-          className="absolute -right-24 top-8 size-80 rounded-full border border-sage/20"
+          className="absolute inset-0 -z-10 bg-gradient-to-r from-ocean/92 via-ocean/70 to-ocean/35"
         />
         <div
           aria-hidden="true"
-          className="absolute -left-32 bottom-0 size-72 rounded-full border border-gold/15"
+          className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-ivory via-ivory/80 to-transparent"
         />
 
-        <Container className="relative py-14 sm:py-20 lg:py-24">
-          <div className="max-w-3xl">
-            <Chip tone="sage" className="bg-white/70">
-              Now booking in Jos, Plateau State
+        <Container className="relative pb-28 pt-16 sm:pb-32 sm:pt-20 lg:pb-36 lg:pt-28">
+          <div className="max-w-2xl">
+            <Chip tone="sage" className="bg-white/15 text-ivory backdrop-blur-sm">
+              Plateau State, Nigeria
             </Chip>
-            <h1 className="mt-5 text-h1 text-ocean">
+            <h1 className="mt-5 text-h1 text-ivory">
               Find somewhere that feels like home.
             </h1>
-            <p className="mt-4 max-w-xl text-base text-charcoal/75 sm:text-lg">
+            <p className="mt-4 max-w-xl text-body text-ivory/90 sm:text-lg">
               Discover hotels designed around the way you travel. Clear prices,
               verified stays and instant confirmation — all in one calm place.
             </p>
           </div>
-
-          <SearchBar className="mt-8 max-w-5xl" />
-
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-secondary text-charcoal/75">
-            <span className="inline-flex items-center gap-1.5">
-              <Check className="size-4 text-sage-deep" aria-hidden="true" />
-              Verified hotels
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Check className="size-4 text-sage-deep" aria-hidden="true" />
-              Taxes included
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Check className="size-4 text-sage-deep" aria-hidden="true" />
-              Free cancellation on most stays
-            </span>
-          </div>
         </Container>
       </section>
+
+      <Container className="relative z-10 -mt-16 sm:-mt-20">
+        <SearchBar className="shadow-large" />
+
+        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-secondary text-charcoal/75">
+          <span className="inline-flex items-center gap-1.5">
+            <Check className="size-4 text-sage-deep" aria-hidden="true" />
+            Verified hotels
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <Check className="size-4 text-sage-deep" aria-hidden="true" />
+            Taxes included
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <Check className="size-4 text-sage-deep" aria-hidden="true" />
+            Free cancellation on most stays
+          </span>
+        </div>
+      </Container>
 
       <section id="destinations" className="scroll-mt-24 py-16 sm:py-20">
         <Container>
@@ -90,17 +97,12 @@ export default async function HomePage() {
             }
           />
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {POPULAR_DESTINATIONS.map((destination, index) => (
+          <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+            {POPULAR_DESTINATIONS.map((destination) => (
               <DestinationCard
                 key={destination.name}
                 destination={destination}
-                featured={index === 0}
-                className={
-                  index === 0
-                    ? "sm:col-span-2 lg:aspect-[2.1/1]"
-                    : undefined
-                }
+                variant="strip"
               />
             ))}
           </div>
