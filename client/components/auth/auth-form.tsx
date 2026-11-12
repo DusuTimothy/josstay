@@ -5,9 +5,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AlertCircle } from "lucide-react";
 import { api, getApiErrorMessage } from "@/lib/api";
+import { GOOGLE_CLIENT_ID } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
+import { GoogleSignInButton } from "./google-sign-in-button";
 
 export interface AuthFormProps {
   mode: "sign-in" | "sign-up";
@@ -26,6 +28,40 @@ export function AuthForm({ mode }: AuthFormProps) {
   const isSignUp = mode === "sign-up";
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  /** Return the guest to checkout (or any other protected page) after auth. */
+  function redirectDestination() {
+    const redirect = new URLSearchParams(window.location.search).get(
+      "redirect",
+    );
+
+    return redirect && redirect.startsWith("/") && !redirect.startsWith("//")
+      ? redirect
+      : "/";
+  }
+
+  function storeSession(token: string) {
+    window.localStorage.setItem("josstay_token", token);
+    router.push(redirectDestination());
+    router.refresh();
+  }
+
+  async function handleGoogleCredential(idToken: string) {
+    setError(null);
+
+    try {
+      setIsSubmitting(true);
+      const { data } = await api.post<AuthResponse>("/auth/google", {
+        idToken,
+      });
+
+      storeSession(data.data.token);
+    } catch (submitError) {
+      setError(getApiErrorMessage(submitError));
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -52,19 +88,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         payload,
       );
 
-      window.localStorage.setItem("josstay_token", data.data.token);
-
-      // Return the guest to checkout (or any other protected page) after auth.
-      const redirect = new URLSearchParams(window.location.search).get(
-        "redirect",
-      );
-      const destination =
-        redirect && redirect.startsWith("/") && !redirect.startsWith("//")
-          ? redirect
-          : "/";
-
-      router.push(destination);
-      router.refresh();
+      storeSession(data.data.token);
     } catch (submitError) {
       setError(getApiErrorMessage(submitError));
     } finally {
@@ -82,6 +106,23 @@ export function AuthForm({ mode }: AuthFormProps) {
           <AlertCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
           <span>{error}</span>
         </div>
+      ) : null}
+
+      {GOOGLE_CLIENT_ID ? (
+        <>
+          <GoogleSignInButton
+            clientId={GOOGLE_CLIENT_ID}
+            onCredential={handleGoogleCredential}
+          />
+
+          <div className="flex items-center gap-3" aria-hidden="true">
+            <span className="h-px flex-1 bg-sand" />
+            <span className="text-metadata text-charcoal/45">
+              or use email and password
+            </span>
+            <span className="h-px flex-1 bg-sand" />
+          </div>
+        </>
       ) : null}
 
       {isSignUp ? (

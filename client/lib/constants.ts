@@ -13,6 +13,13 @@ export const SITE = {
   email: process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? "hello@josstay.ng",
 } as const;
 
+/**
+ * Google OAuth web client ID. When it is missing the Google button is not
+ * rendered and guests sign in with email and password.
+ */
+export const GOOGLE_CLIENT_ID =
+  process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID?.trim() ?? "";
+
 export const NAV_LINKS = [
   { label: "Hotels", href: "/search" },
   { label: "Destinations", href: "/#destinations" },

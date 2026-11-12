@@ -149,7 +149,7 @@ available rooms =
 | Home, search, hotel detail, checkout, style guide | Home/search/hotel/checkout wired to live APIs; sample data only as a local fallback |
 | Sign in / sign up | Wired to the real auth endpoints |
 | Auth (register, login, me) | Done (bcrypt + JWT) |
-| Google sign-in | Stub (`501`) |
+| Google sign-in | Done: ID token verified, account linked or created, JWT issued |
 | Hotel list + detail APIs | Done for published hotels |
 | Search API | Done: destination, area, price, rating, distance, amenities, breakfast, cancellation, sort, pagination |
 | Availability calculation | Done read-only |

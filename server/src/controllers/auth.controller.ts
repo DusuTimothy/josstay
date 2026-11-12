@@ -1,10 +1,18 @@
-import { randomBytes } from "node:crypto";
 import type { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import { User } from "../models";
+import {
+  findOrCreateGoogleUser,
+  verifyGoogleIdToken,
+} from "../services/google-auth.service";
 import { ApiError, asyncHandler } from "../utils/api-error";
 import { signAccessToken } from "../utils/jwt";
-import type { LoginInput, RegisterInput } from "../validators/auth.validator";
+import { buildReferralCode } from "../utils/referral";
+import type {
+  GoogleAuthInput,
+  LoginInput,
+  RegisterInput,
+} from "../validators/auth.validator";
 
 const BCRYPT_ROUNDS = 12;
 
@@ -20,14 +28,6 @@ function serializeUser(user: User) {
     emailVerified: user.emailVerified,
     createdAt: user.createdAt,
   };
-}
-
-/**
- * Short, human-friendly referral code. The unique index is the source of
- * truth; collisions are extremely unlikely with 3 random bytes.
- */
-function buildReferralCode(): string {
-  return `JOS-${randomBytes(3).toString("hex").toUpperCase()}`;
 }
 
 export const register = asyncHandler(async (req: Request, res: Response) => {
@@ -102,11 +102,26 @@ export const me = asyncHandler(async (req: Request, res: Response) => {
 });
 
 /**
- * Google Sign-In: verify the Google ID token, then find-or-create the user.
- * DeepSeek: implement with `google-auth-library` once the client ID is set.
+ * Google Sign-In.
+ *
+ * The client sends the ID token that Google Identity Services returns. The
+ * token is verified against Google's public keys and our client ID, then the
+ * account is found or created and a normal JosStay JWT is issued.
  */
-export const google = asyncHandler(async () => {
-  throw ApiError.notImplemented(
-    "Google sign-in is not wired up yet. Add google-auth-library, verify the ID token with GOOGLE_CLIENT_ID, then find or create the user by googleId/email.",
-  );
+export const google = asyncHandler(async (req: Request, res: Response) => {
+  const input = req.body as GoogleAuthInput;
+
+  const profile = await verifyGoogleIdToken(input.idToken);
+  const user = await findOrCreateGoogleUser(profile);
+
+  const token = signAccessToken({
+    sub: user.id,
+    email: user.email,
+    role: user.role,
+  });
+
+  res.json({
+    success: true,
+    data: { token, user: serializeUser(user) },
+  });
 });

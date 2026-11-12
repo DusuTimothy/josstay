@@ -57,7 +57,7 @@ Type: **Fraunces** for the logo, H1 and H2; **Inter** for everything else. The t
 
 **Checkout** — `GuestForm`, `PaymentForm`, `ReservationSummary`
 
-**Auth** — `AuthForm` (sign in / create account, wired to `/auth/login` and `/auth/register`)
+**Auth** — `AuthForm` (sign in / create account, wired to `/auth/login` and `/auth/register`), `GoogleSignInButton` (Google Identity Services, wired to `/auth/google`)
 
 **Home** — `DestinationCard`
 
@@ -68,7 +68,7 @@ Open `/styleguide` in the client to see every token and component state on one p
 - Express app with Helmet, CORS allow-list, rate limiting and structured error handling
 - Zod request validation middleware
 - Sequelize models: `User`, `Hotel`, `HotelImage`, `Room`, `Booking`, `Payment`, `Review`, `AvailabilityHold`, `BlockedDate`
-- Auth: register, login, me (bcrypt + JWT), Google endpoint stubbed
+- Auth: register, login, me (bcrypt + JWT), Google sign-in (verified ID token, find-or-create)
 - Hotels and search endpoints implemented for the basic published-listing flow
 - Booking quote implemented (live availability, server-side pricing)
 - Booking creation implemented in one transaction: room row lock, availability re-check, server re-pricing, commission split and 15-minute hold
@@ -85,7 +85,7 @@ Open `/styleguide` in the client to see every token and component state on one p
 | `POST` | `/api/v1/auth/register` | Done |
 | `POST` | `/api/v1/auth/login` | Done |
 | `GET` | `/api/v1/auth/me` | Done |
-| `POST` | `/api/v1/auth/google` | Stub (`501`) |
+| `POST` | `/api/v1/auth/google` | Done (verified ID token, account linked or created) |
 | `GET` | `/api/v1/hotels` | Featured/published hotels |
 | `GET` | `/api/v1/hotels/:slug` | Hotel detail + rooms |
 | `GET` | `/api/v1/search` | Filters, sorting, pagination |
@@ -165,6 +165,35 @@ Then run `npm run db:sync && npm run db:seed`. The seed creates five placeholder
 Jos hotels and demo accounts (`manager@josstay.local` / `admin@josstay.local`,
 password `JosStay123!`) and refuses to run in production. The full scope map is
 in [`SCOPE.md`](./SCOPE.md).
+
+### Google sign-in setup
+
+Google sign-in stays hidden until you add the OAuth client ID to both env files.
+
+1. In the [Google Cloud console](https://console.cloud.google.com/), pick a
+   project, enable the **Google Identity** API and create an
+   **OAuth 2.0 Client ID → Web application**.
+2. Add `http://localhost:3000` to **Authorized JavaScript origins** (add the
+   live domain later). The one-tap button does not use redirect URIs, but
+   `http://localhost:3000` is a harmless placeholder.
+3. Copy the **Client ID** into both env files:
+
+```bash
+# client/.env.local
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=1234567890-abc.apps.googleusercontent.com
+
+# server/.env
+GOOGLE_CLIENT_ID=1234567890-abc.apps.googleusercontent.com
+```
+
+4. Restart both apps (`npm run dev`).
+
+The browser sends the ID token that Google Identity Services returns to
+`POST /api/v1/auth/google`. The server verifies it against Google's public keys
+and our client ID, then finds the account (linking it to an existing password
+account with the same email) or creates one, and returns the usual JosStay JWT.
+Leave `NEXT_PUBLIC_GOOGLE_CLIENT_ID` empty and the button is not rendered —
+email and password keep working.
 
 ---
 
@@ -250,7 +279,7 @@ None of these should block the first real booking.
 
 The checklist above is the order to build in. This list explains what each area needs.
 
-1. **Auth session** — Google one-tap, a signed-in header state, protected routes and token refresh. The email/password pages are already wired.
+1. **Auth session** — Google one-tap is built; a signed-in header state, protected routes and token refresh are still open. The email/password pages are already wired.
 2. **Search** — connect `SearchBar` + `FilterPanel` to `/search`; build URL state and use the server-side filters instead of filtering only in the browser.
 3. **Hotel detail** — replace `lib/sample-data.ts` with API fetches from `/hotels/:slug`; wire room selection and dates into the booking panel and quote endpoint.
 4. **Checkout and payments** — create the booking hold, initialize Paystack, verify on callback, handle the webhook inside a transaction.
