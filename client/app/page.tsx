@@ -10,11 +10,14 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { Container } from "@/components/ui/container";
 import { POPULAR_DESTINATIONS } from "@/lib/constants";
+import { guestOptionIndex } from "@/lib/search";
 import { SAMPLE_HOTELS } from "@/lib/sample-data";
+import { defaultStay } from "@/lib/stay";
 import { fetchFeaturedHotels } from "@/lib/server-api";
 
 export default async function HomePage() {
   let featured = SAMPLE_HOTELS;
+  const stay = defaultStay();
 
   try {
     const hotels = await fetchFeaturedHotels();
@@ -38,7 +41,11 @@ export default async function HomePage() {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-gradient-to-r from-ocean/92 via-ocean/70 to-ocean/35"
+          className="absolute inset-0 -z-10 bg-gradient-to-r from-ocean/95 via-ocean/88 to-ocean/55"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 -z-10 h-2/3 bg-gradient-to-b from-ocean/55 to-transparent"
         />
         <div
           aria-hidden="true"
@@ -62,7 +69,12 @@ export default async function HomePage() {
       </section>
 
       <Container className="relative z-10 -mt-16 sm:-mt-20">
-        <SearchBar className="shadow-large" />
+        <SearchBar
+          className="shadow-large"
+          defaultCheckIn={stay.checkIn}
+          defaultCheckOut={stay.checkOut}
+          defaultGuestsIndex={guestOptionIndex(stay.adults, stay.children)}
+        />
 
         <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-secondary text-charcoal/75">
           <span className="inline-flex items-center gap-1.5">
