@@ -10,8 +10,20 @@ import { Chip } from "@/components/ui/chip";
 import { Container } from "@/components/ui/container";
 import { POPULAR_DESTINATIONS } from "@/lib/constants";
 import { SAMPLE_HOTELS } from "@/lib/sample-data";
+import { fetchFeaturedHotels } from "@/lib/server-api";
 
-export default function HomePage() {
+export default async function HomePage() {
+  let featured = SAMPLE_HOTELS;
+
+  try {
+    const hotels = await fetchFeaturedHotels();
+    if (hotels.length > 0) featured = hotels;
+  } catch (error) {
+    // Home is statically generated, so a build without the API must still
+    // succeed. The sample stays are replaced on the next revalidation.
+    console.error("[home] API unavailable, using sample hotels:", error);
+  }
+
   return (
     <>
       <section className="relative overflow-hidden border-b border-sand/60">
@@ -113,7 +125,7 @@ export default function HomePage() {
           />
 
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {SAMPLE_HOTELS.slice(0, 3).map((hotel) => (
+            {featured.slice(0, 3).map((hotel) => (
               <HotelCard key={hotel.id} hotel={hotel} />
             ))}
           </div>

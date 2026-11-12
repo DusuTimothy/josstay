@@ -53,7 +53,17 @@ export function AuthForm({ mode }: AuthFormProps) {
       );
 
       window.localStorage.setItem("josstay_token", data.data.token);
-      router.push("/");
+
+      // Return the guest to checkout (or any other protected page) after auth.
+      const redirect = new URLSearchParams(window.location.search).get(
+        "redirect",
+      );
+      const destination =
+        redirect && redirect.startsWith("/") && !redirect.startsWith("//")
+          ? redirect
+          : "/";
+
+      router.push(destination);
       router.refresh();
     } catch (submitError) {
       setError(getApiErrorMessage(submitError));

@@ -26,6 +26,8 @@ export interface BookingPanelProps {
   freeCancellationUntil?: string;
   onReserve?: () => void;
   reserveHref?: string;
+  isLoading?: boolean;
+  reserveDisabled?: boolean;
   className?: string;
 }
 
@@ -40,6 +42,8 @@ export function BookingPanel({
   freeCancellationUntil,
   onReserve,
   reserveHref,
+  isLoading,
+  reserveDisabled,
   className,
 }: BookingPanelProps) {
   return (
@@ -112,16 +116,25 @@ export function BookingPanel({
       {reserveHref ? (
         <Link
           href={reserveHref}
+          aria-disabled={reserveDisabled || undefined}
           className={cn(
             buttonVariants({ variant: "primary", size: "md" }),
             "mt-4 w-full",
+            reserveDisabled && "pointer-events-none opacity-50",
           )}
         >
           Reserve
         </Link>
       ) : (
-        <Button type="button" fullWidth className="mt-4" onClick={onReserve}>
-          Reserve
+        <Button
+          type="button"
+          fullWidth
+          className="mt-4"
+          onClick={onReserve}
+          isLoading={isLoading}
+          disabled={reserveDisabled}
+        >
+          {isLoading ? "Checking availability" : "Reserve"}
         </Button>
       )}
 

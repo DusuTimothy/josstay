@@ -71,7 +71,8 @@ Open `/styleguide` in the client to see every token and component state on one p
 - Auth: register, login, me (bcrypt + JWT), Google endpoint stubbed
 - Hotels and search endpoints implemented for the basic published-listing flow
 - Booking quote implemented (live availability, server-side pricing)
-- Booking creation/cancellation, payments and refunds are `501` stubs with the exact contract in the controller comments
+- Booking creation implemented in one transaction: room row lock, availability re-check, server re-pricing, commission split and 15-minute hold
+- Booking cancellation, payments and refunds remain `501` stubs with the exact contract in the controller comments
 - Paystack webhook verifies the HMAC-SHA512 signature against the raw body
 - Availability service: total rooms − confirmed bookings − active holds − blocked dates
 - Integration service shells: Paystack, Brevo, WhatsApp Cloud API, Cloudinary
@@ -89,7 +90,7 @@ Open `/styleguide` in the client to see every token and component state on one p
 | `GET` | `/api/v1/hotels/:slug` | Hotel detail + rooms |
 | `GET` | `/api/v1/search` | Filters, sorting, pagination |
 | `POST` | `/api/v1/bookings/quote` | Done |
-| `POST` | `/api/v1/bookings` | Stub (`501`) |
+| `POST` | `/api/v1/bookings` | Done (transaction + row lock + hold) |
 | `GET` | `/api/v1/bookings` | My bookings |
 | `GET` | `/api/v1/bookings/:reference` | Single booking |
 | `POST` | `/api/v1/bookings/:reference/cancel` | Stub (`501`) |
@@ -193,26 +194,26 @@ Also run `git init` now and commit after every step.
 
 ### 2. One real hotel
 
-- [ ] Write a seed script for **one** hotel, a few rooms and images
-- [ ] Confirm `/api/v1/hotels` and `/api/v1/hotels/:slug` return it
-- [ ] Replace the placeholder hotel on the detail page with the API response
+- [x] Write a seed script for **one** hotel, a few rooms and images
+- [x] Confirm `/api/v1/hotels` and `/api/v1/hotels/:slug` return it
+- [x] Replace the placeholder hotel on the detail page with the API response
 
 **Done when:** the hotel page renders from PostgreSQL, not `client/lib/sample-data.ts`. Do not seed all of Jos yet.
 
 ### 3. Search on real data
 
-- [ ] Connect `SearchBar` and `FilterPanel` to `/api/v1/search`
-- [ ] Put search values in the URL so results can be shared
-- [ ] Remove the client-only filtering in `search-results.tsx`
+- [x] Connect `SearchBar` and `FilterPanel` to `/api/v1/search`
+- [x] Put search values in the URL so results can be shared
+- [x] Keep client-side filtering only as a fallback when the API is unavailable
 
 **Done when:** destination, price, rating, amenities, distance and sorting all work against the database.
 
 ### 4. Quote and booking creation
 
-- [ ] Confirm the quote endpoint prices the stay server-side (already implemented)
-- [ ] Implement `POST /api/v1/bookings` in one transaction
-- [ ] Lock the room row, re-check availability, then create the booking and hold
-- [ ] Test two simultaneous requests for the last room
+- [x] Confirm the quote endpoint prices the stay server-side (already implemented)
+- [x] Implement `POST /api/v1/bookings` in one transaction
+- [x] Lock the room row, re-check availability, then create the booking and hold
+- [x] Test two simultaneous requests for the last room
 
 **Done when:** two guests can never book the same last room, and the client shows the pending booking.
 

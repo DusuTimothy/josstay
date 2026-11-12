@@ -11,6 +11,7 @@ export interface RoomOptionCardProps {
   room: Room;
   nights: number;
   selected?: boolean;
+  availableRooms?: number;
   onSelect?: (room: Room) => void;
   className?: string;
 }
@@ -19,10 +20,15 @@ export function RoomOptionCard({
   room,
   nights,
   selected = false,
+  availableRooms,
   onSelect,
   className,
 }: RoomOptionCardProps) {
   const total = room.pricePerNight * Math.max(nights, 1);
+  const roomsLeft =
+    typeof availableRooms === "number"
+      ? availableRooms
+      : room.availableRooms;
 
   return (
     <article
@@ -79,10 +85,9 @@ export function RoomOptionCard({
                 Breakfast included
               </span>
             ) : null}
-            {typeof room.availableRooms === "number" &&
-            room.availableRooms <= 2 ? (
+            {typeof roomsLeft === "number" && roomsLeft <= 2 ? (
               <span className="font-medium text-warning">
-                Only {room.availableRooms} left
+                Only {roomsLeft} left
               </span>
             ) : null}
           </div>

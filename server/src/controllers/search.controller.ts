@@ -45,6 +45,10 @@ function buildWhere(query: SearchQuery): WhereOptions<Hotel> {
     conditions.push({ amenities: { [Op.contains]: query.amenities } });
   }
 
+  if (query.propertyTypes?.length) {
+    conditions.push({ propertyType: { [Op.in]: query.propertyTypes } });
+  }
+
   if (query.breakfastIncluded !== undefined) {
     conditions.push({ breakfastIncluded: query.breakfastIncluded });
   }

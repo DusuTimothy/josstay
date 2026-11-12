@@ -42,6 +42,7 @@ export interface HotelSummary {
   area: string;
   city: string;
   state?: string;
+  propertyType?: string;
   distanceKm: number;
   rating: number;
   reviewCount: number;
@@ -142,4 +143,64 @@ export interface ReservationSummaryData {
   total: number;
   freeCancellationUntil?: string;
   instantConfirmation?: boolean;
+}
+
+export type BookingStatus =
+  | "pending"
+  | "confirmed"
+  | "cancelled"
+  | "completed"
+  | "refunded";
+
+export interface BookingRecord {
+  id: string;
+  reference: string;
+  status: BookingStatus;
+  checkIn: string;
+  checkOut: string;
+  nights: number;
+  rooms: number;
+  adults: number;
+  children: number;
+  guestName: string;
+  guestEmail: string;
+  guestPhone: string;
+  roomTotal: number;
+  taxes: number;
+  total: number;
+  currency: string;
+  commissionRate: number;
+  commissionAmount: number;
+  hotelShare: number;
+  cancellationDeadline: string | null;
+  paystackReference: string | null;
+  confirmedAt: string | null;
+  cancelledAt: string | null;
+  createdAt: string;
+  hotel?: {
+    id: string;
+    slug: string;
+    name: string;
+    area: string;
+    city: string;
+    address: string;
+    phone?: string;
+  };
+  room?: {
+    id: string;
+    name: string;
+    bedType: string;
+  };
+}
+
+export interface BookingPayment {
+  authorizationUrl: string;
+  accessCode: string;
+  reference: string;
+}
+
+export interface CreateBookingResult {
+  booking: BookingRecord;
+  payment: BookingPayment | null;
+  holdExpiresAt: string;
 }

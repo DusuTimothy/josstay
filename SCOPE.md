@@ -146,7 +146,7 @@ available rooms =
 | Area | Status |
 | --- | --- |
 | Brand tokens, typography, component library | Done |
-| Home, search, hotel detail, checkout, style guide | Page shells with placeholder data |
+| Home, search, hotel detail, checkout, style guide | Home/search/hotel/checkout wired to live APIs; sample data only as a local fallback |
 | Sign in / sign up | Wired to the real auth endpoints |
 | Auth (register, login, me) | Done (bcrypt + JWT) |
 | Google sign-in | Stub (`501`) |
@@ -154,7 +154,7 @@ available rooms =
 | Search API | Done: destination, area, price, rating, distance, amenities, breakfast, cancellation, sort, pagination |
 | Availability calculation | Done read-only |
 | Booking quote | Done: live availability + server-side pricing |
-| Booking creation | Stub (`501`) — needs transaction + row lock + hold |
+| Booking creation | Done: transaction + room row lock + re-price + availability hold |
 | Booking list/detail | Done for the signed-in user |
 | Booking cancellation | Stub (`501`) |
 | Paystack initialize/verify/refund | Stubs (`501`) |

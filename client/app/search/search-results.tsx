@@ -1,8 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { SearchX, SlidersHorizontal } from "lucide-react";
 import { DEFAULT_SEARCH_FILTERS } from "@/lib/constants";
+import { buildSearchParams } from "@/lib/search";
+import type { StayQuery } from "@/lib/stay";
 import type { HotelSummary, SearchFilters } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -12,15 +15,27 @@ import { ResultsHeader } from "@/components/search/results-header";
 
 export interface SearchResultsProps {
   hotels: HotelSummary[];
+  total: number;
   initialFilters?: Partial<SearchFilters>;
   destination?: string;
+  stay: StayQuery;
+  /**
+   * The sample fallback cannot ask the server to filter, so it filters in the
+   * browser. Live API results are already filtered and paginated.
+   */
+  applyLocalFilters?: boolean;
 }
 
 export function SearchResults({
   hotels,
+  total,
   initialFilters,
   destination,
+  stay,
+  applyLocalFilters = false,
 }: SearchResultsProps) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const [filters, setFilters] = useState<SearchFilters>({
     ...DEFAULT_SEARCH_FILTERS,
     ...initialFilters,
@@ -28,6 +43,8 @@ export function SearchResults({
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const results = useMemo(() => {
+    if (!applyLocalFilters) return hotels;
+
     const filtered = hotels.filter((hotel) => {
       if (hotel.pricePerNight < filters.minPrice) return false;
       if (hotel.pricePerNight > filters.maxPrice) return false;
@@ -75,21 +92,52 @@ export function SearchResults({
           return b.reviewCount - a.reviewCount;
       }
     });
-  }, [hotels, filters]);
+  }, [applyLocalFilters, filters, hotels]);
 
-  function patchFilters(next: SearchFilters) {
+  const count = applyLocalFilters ? results.length : total;
+
+  function navigate(next: SearchFilters) {
+    const params = buildSearchParams({
+      ...stay,
+      destination: next.destination,
+      filters: next,
+    });
+
+    startTransition(() => {
+      router.push(`/search?${params.toString()}`, { scroll: false });
+    });
+  }
+
+  function handleApply(next: SearchFilters) {
     setFilters(next);
     setMobileFiltersOpen(false);
+    navigate(next);
+  }
+
+  function handleClear() {
+    const next = { ...DEFAULT_SEARCH_FILTERS };
+    setFilters(next);
+    setMobileFiltersOpen(false);
+    navigate(next);
+  }
+
+  function handleSort(sort: SearchFilters["sort"]) {
+    const next = { ...filters, sort };
+    setFilters(next);
+    navigate(next);
   }
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[280px_1fr] lg:items-start">
+    <div
+      className="grid gap-8 lg:grid-cols-[280px_1fr] lg:items-start"
+      aria-busy={isPending}
+    >
       <div className="hidden lg:block">
         <FilterPanel
-          resultCount={results.length}
+          resultCount={count}
           value={filters}
-          onApply={patchFilters}
-          onClear={() => setFilters(DEFAULT_SEARCH_FILTERS)}
+          onApply={handleApply}
+          onClear={handleClear}
           className="sticky top-24"
         />
       </div>
@@ -109,21 +157,19 @@ export function SearchResults({
           {mobileFiltersOpen ? (
             <FilterPanel
               id="mobile-filters"
-              resultCount={results.length}
+              resultCount={count}
               value={filters}
-              onApply={patchFilters}
-              onClear={() => setFilters(DEFAULT_SEARCH_FILTERS)}
+              onApply={handleApply}
+              onClear={handleClear}
               className="mt-3"
             />
           ) : null}
         </div>
 
         <ResultsHeader
-          count={results.length}
+          count={count}
           sort={filters.sort}
-          onSortChange={(sort) =>
-            setFilters((current) => ({ ...current, sort }))
-          }
+          onSortChange={handleSort}
           destination={destination}
           className="mt-5 lg:mt-0"
         />
@@ -140,11 +186,7 @@ export function SearchResults({
             title="No stays match those filters"
             description="Try widening your price range or removing an amenity. Jos has more to offer than this."
             action={
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={() => setFilters(DEFAULT_SEARCH_FILTERS)}
-              >
+              <Button type="button" variant="ghost" onClick={handleClear}>
                 Clear all filters
               </Button>
             }

@@ -5,6 +5,19 @@ const optionalBoolean = z
   .transform((value) => value === "true")
   .optional();
 
+/** Accept both repeated params and comma-separated values. */
+const csvArray = z.preprocess((value) => {
+  if (value === undefined) return undefined;
+  if (Array.isArray(value)) return value;
+  if (typeof value === "string") {
+    return value
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+  return value;
+}, z.array(z.string().min(1)).optional());
+
 export const searchQuerySchema = z.object({
   destination: z.string().trim().min(1).optional(),
   area: z.string().trim().min(1).optional(),
@@ -16,17 +29,8 @@ export const searchQuerySchema = z.object({
   maxPrice: z.coerce.number().min(0).optional(),
   minRating: z.coerce.number().min(0).max(10).optional(),
   maxDistanceKm: z.coerce.number().min(0).max(100).optional(),
-  amenities: z.preprocess((value) => {
-    if (value === undefined) return undefined;
-    if (Array.isArray(value)) return value;
-    if (typeof value === "string") {
-      return value
-        .split(",")
-        .map((item) => item.trim())
-        .filter(Boolean);
-    }
-    return value;
-  }, z.array(z.string().min(1)).optional()),
+  amenities: csvArray,
+  propertyTypes: csvArray,
   breakfastIncluded: optionalBoolean,
   freeCancellation: optionalBoolean,
   sort: z
