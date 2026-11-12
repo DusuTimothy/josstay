@@ -1,7 +1,6 @@
 "use client";
 
 import type { MouseEvent } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { Heart, MapPin } from "lucide-react";
 import { formatNaira } from "@/lib/format";
@@ -11,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Rating } from "@/components/ui/rating";
 import { AmenityList } from "@/components/hotel/amenity-list";
+import { SmartImage } from "@/components/ui/smart-image";
 
 const BADGE_COPY: Record<
   HotelBadge,
@@ -55,7 +55,7 @@ export function HotelCard({
           aria-label={`View ${hotel.name}`}
           className="absolute inset-0 z-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ocean"
         >
-          <Image
+          <SmartImage
             src={hotel.imageUrl}
             alt={hotel.imageAlt ?? hotel.name}
             fill

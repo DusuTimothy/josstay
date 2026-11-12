@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import type { Destination } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { SmartImage } from "@/components/ui/smart-image";
 
 export interface DestinationCardProps {
   destination: Destination;
@@ -26,7 +26,7 @@ export function DestinationCard({
         className,
       )}
     >
-      <Image
+      <SmartImage
         src={destination.imageUrl}
         alt={`${destination.name}, ${destination.area}`}
         fill

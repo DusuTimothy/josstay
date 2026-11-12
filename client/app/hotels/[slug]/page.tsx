@@ -11,7 +11,7 @@ import { TrustStrip } from "@/components/layout/trust-strip";
 import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
 import { Rating } from "@/components/ui/rating";
-import { absoluteUrl, hotelJsonLd } from "@/lib/seo";
+import { absoluteImageUrl, absoluteUrl, hotelJsonLd } from "@/lib/seo";
 import { fetchHotel } from "@/lib/server-api";
 import { parseStayQuery } from "@/lib/stay";
 
@@ -36,7 +36,7 @@ export async function generateMetadata({
     openGraph: {
       title: hotel.name,
       description: hotel.description,
-      images: [{ url: hotel.imageUrl }],
+      images: [{ url: absoluteImageUrl(hotel.imageUrl) }],
     },
     alternates: {
       canonical: `/hotels/${hotel.slug}`,

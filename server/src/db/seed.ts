@@ -84,15 +84,15 @@ const HOTELS: SeedHotel[] = [
     email: "stay@crestviewjos.ng",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1800&q=80",
+        url: "/images/photos/1566073771259-6a8506099945.jpg",
         alt: "Crestview Suites exterior at golden hour",
       },
       {
-        url: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80",
+        url: "/images/photos/1582719508461-905c673771fd.jpg",
         alt: "Deluxe room with warm natural light",
       },
       {
-        url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
+        url: "/images/photos/1571896349842-33c89424de2d.jpg",
         alt: "Pool and loungers at the hotel",
       },
     ],
@@ -189,11 +189,11 @@ const HOTELS: SeedHotel[] = [
     email: "hello@sherehillslodge.ng",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1400&q=80",
+        url: "/images/photos/1571896349842-33c89424de2d.jpg",
         alt: "Pool deck overlooking the hills",
       },
       {
-        url: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
+        url: "/images/photos/1618773928121-c32242e63f39.jpg",
         alt: "Lodge bedroom with garden view",
       },
     ],
@@ -256,11 +256,11 @@ const HOTELS: SeedHotel[] = [
     email: "reservations@terminusgrand.ng",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1400&q=80",
+        url: "/images/photos/1551882547-ff40c63fe5fa.jpg",
         alt: "Terminus Grand Hotel exterior",
       },
       {
-        url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
+        url: "/images/photos/1590490360182-c33d57733427.jpg",
         alt: "Modern hotel room with a city view",
       },
     ],
@@ -321,11 +321,11 @@ const HOTELS: SeedHotel[] = [
     email: "stay@bukurugarden.ng",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1400&q=80",
+        url: "/images/photos/1445019980597-93fa8acb246c.jpg",
         alt: "Garden hotel room with soft linen",
       },
       {
-        url: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80",
+        url: "/images/photos/1564501049412-61c2a3083791.jpg",
         alt: "Hotel garden and seating area",
       },
     ],
@@ -376,11 +376,11 @@ const HOTELS: SeedHotel[] = [
     email: "stay@rayfieldcourt.ng",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1400&q=80",
+        url: "/images/photos/1522708323590-d24dbb6b0267.jpg",
         alt: "Bright apartment living area",
       },
       {
-        url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
+        url: "/images/photos/1560448204-e02f11c3d0e2.jpg",
         alt: "Apartment kitchen and dining space",
       },
     ],

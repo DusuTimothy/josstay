@@ -5,6 +5,16 @@ export function absoluteUrl(path = "/"): string {
   return new URL(path, SITE.url).toString();
 }
 
+/**
+ * Photo URLs can be absolute (Cloudinary) or site-relative (placeholder
+ * photos in `client/public`). Social tags and JSON-LD need the absolute form.
+ */
+export function absoluteImageUrl(url: string): string {
+  if (!url) return absoluteUrl("/icon.svg");
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+  return absoluteUrl(url);
+}
+
 export function hotelJsonLd(hotel: HotelDetail, url: string) {
   return {
     "@context": "https://schema.org",
@@ -12,7 +22,7 @@ export function hotelJsonLd(hotel: HotelDetail, url: string) {
     name: hotel.name,
     description: hotel.description,
     url,
-    image: hotel.images.map((image) => image.url),
+    image: hotel.images.map((image) => absoluteImageUrl(image.url)),
     telephone: hotel.phone,
     email: hotel.email,
     priceRange: "₦₦",

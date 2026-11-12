@@ -22,7 +22,7 @@ export const SAMPLE_HOTELS: HotelSummary[] = [
     reviewCount: 1_284,
     pricePerNight: 62_000,
     imageUrl:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1400&q=80",
+      "/images/photos/1566073771259-6a8506099945.jpg",
     imageAlt: "Warmly lit hotel exterior at golden hour",
     amenities: [
       "wifi",
@@ -51,7 +51,7 @@ export const SAMPLE_HOTELS: HotelSummary[] = [
     reviewCount: 486,
     pricePerNight: 45_000,
     imageUrl:
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80",
+      "/images/photos/1571896349842-33c89424de2d.jpg",
     imageAlt: "Pool deck overlooking the hills",
     amenities: [
       "wifi",
@@ -78,7 +78,7 @@ export const SAMPLE_HOTELS: HotelSummary[] = [
     reviewCount: 932,
     pricePerNight: 38_000,
     imageUrl:
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1000&q=80",
+      "/images/photos/1551882547-ff40c63fe5fa.jpg",
     imageAlt: "Bright hotel room with a city view",
     amenities: [
       "wifi",
@@ -104,7 +104,7 @@ export const SAMPLE_HOTELS: HotelSummary[] = [
     reviewCount: 214,
     pricePerNight: 32_000,
     imageUrl:
-      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80",
+      "/images/photos/1542314831-068cd1dbfeeb.jpg",
     imageAlt: "Garden courtyard with shaded seating",
     amenities: ["wifi", "parking", "breakfast", "water", "security"],
     cancellationPolicy: "strict",
@@ -122,7 +122,7 @@ export const SAMPLE_HOTELS: HotelSummary[] = [
     reviewCount: 156,
     pricePerNight: 75_000,
     imageUrl:
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1000&q=80",
+      "/images/photos/1582719508461-905c673771fd.jpg",
     imageAlt: "Calm apartment living room in warm neutrals",
     amenities: [
       "wifi",
@@ -142,23 +142,23 @@ export const SAMPLE_HOTELS: HotelSummary[] = [
 
 const CRESTVIEW_IMAGES = [
   {
-    url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1800&q=80",
+    url: "/images/photos/1566073771259-6a8506099945.jpg",
     alt: "Crestview Suites exterior at golden hour",
   },
   {
-    url: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80",
+    url: "/images/photos/1582719508461-905c673771fd.jpg",
     alt: "Deluxe room with warm natural light",
   },
   {
-    url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
+    url: "/images/photos/1571896349842-33c89424de2d.jpg",
     alt: "Pool and loungers at the hotel",
   },
   {
-    url: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1200&q=80",
+    url: "/images/photos/1551882547-ff40c63fe5fa.jpg",
     alt: "Breakfast setting in the hotel restaurant",
   },
   {
-    url: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=80",
+    url: "/images/photos/1445019980597-93fa8acb246c.jpg",
     alt: "Suite bedroom with soft linen",
   },
 ];

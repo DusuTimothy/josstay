@@ -96,7 +96,7 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     area: "Jos North",
     propertyCount: 48,
     imageUrl:
-      "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1400&q=80",
+      "/images/photos/1449824913935-59a10b8d2000.jpg",
     blurb: "Markets, restaurants and the heart of the city.",
   },
   {
@@ -104,7 +104,7 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     area: "Jos South",
     propertyCount: 32,
     imageUrl:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80",
+      "/images/photos/1566073771259-6a8506099945.jpg",
     blurb: "Quiet streets and comfortable business stays.",
   },
   {
@@ -112,7 +112,7 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     area: "Jos East",
     propertyCount: 14,
     imageUrl:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=80",
+      "/images/photos/1500530855697-b586d89ba3ee.jpg",
     blurb: "Views, trails and a slower pace.",
   },
   {
@@ -120,7 +120,7 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     area: "Jos South",
     propertyCount: 21,
     imageUrl:
-      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80",
+      "/images/photos/1542314831-068cd1dbfeeb.jpg",
     blurb: "Easy access to the southern business district.",
   },
   {
@@ -128,7 +128,7 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     area: "Jos North",
     propertyCount: 26,
     imageUrl:
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1000&q=80",
+      "/images/photos/1551882547-ff40c63fe5fa.jpg",
     blurb: "Central, connected and close to everything.",
   },
 ];

@@ -166,6 +166,14 @@ Jos hotels and demo accounts (`manager@josstay.local` / `admin@josstay.local`,
 password `JosStay123!`) and refuses to run in production. The full scope map is
 in [`SCOPE.md`](./SCOPE.md).
 
+### Placeholder photos
+
+The seeded hotels and the destination cards use stock photos kept in
+`client/public/images/photos`. They are served from the app itself so a page
+never waits on a slow external host, and `SmartImage` swaps in a calm branded
+placeholder if a photo ever fails to load. Replace them with the hotels' own
+Cloudinary uploads — those return absolute URLs and work the same way.
+
 ### Google sign-in setup
 
 Google sign-in stays hidden until you add the OAuth client ID to both env files.

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import type { HotelImage } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { SmartImage } from "@/components/ui/smart-image";
 
 export interface HotelGalleryProps {
   images: HotelImage[];
@@ -25,7 +25,7 @@ export function HotelGallery({
   return (
     <div className={cn("space-y-3", className)}>
       <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-sand">
-        <Image
+        <SmartImage
           src={current.url}
           alt={current.alt || `${hotelName} photo ${active + 1}`}
           fill
@@ -55,7 +55,7 @@ export function HotelGallery({
                   : "border-transparent opacity-75 hover:opacity-100",
               )}
             >
-              <Image
+              <SmartImage
                 src={image.url}
                 alt=""
                 fill

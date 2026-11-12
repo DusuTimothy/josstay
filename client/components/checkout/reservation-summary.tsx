@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   CalendarCheck2,
   LockKeyhole,
@@ -11,6 +10,7 @@ import { formatDateLong, formatNaira } from "@/lib/format";
 import type { ReservationSummaryData } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { SmartImage } from "@/components/ui/smart-image";
 
 export interface ReservationSummaryProps {
   data: ReservationSummaryData;
@@ -39,7 +39,7 @@ export function ReservationSummary({
 
       <div className="mt-4 flex gap-3 border-b border-sand pb-4">
         <div className="relative size-20 shrink-0 overflow-hidden rounded-md bg-sand">
-          <Image
+          <SmartImage
             src={data.hotelImageUrl}
             alt={data.hotelName}
             fill
