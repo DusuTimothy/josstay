@@ -103,9 +103,9 @@ The deck's rule: **borrow proven UX principles, not someone else's identity.**
 
 *Typography should feel premium, not decorative.*
 
-**Typefaces:** Inter for the interface and body text (**Exact**, from the deck), paired with Fraunces, a warm serif, for the logo and large headings (**Proposed**).
+**Typefaces:** Inter for everything — interface, body text, headings and the wordmark (**Exact**, from the deck).
 
-**Pairing rule:** Fraunces for the logo, H1, H2 and large hero headlines. Inter for H3, hotel names, body text, prices, forms, metadata and buttons. The sizes in the table below apply to both families. Fraunces headings use SemiBold (600) in place of the table's Bold.
+**Pairing rule:** one family, weight does the work. H1 and H2 are Bold (700), H3 and hotel names are Semi-bold (600), body and secondary are Regular (400), metadata is Medium (500), buttons are Semi-bold (600). The wordmark is the same family at Bold with tight tracking.
 
 | Style | Size | Weight |
 | --- | --- | --- |
@@ -342,7 +342,7 @@ The stack below is the one chosen for building JosStay. Items marked **Proposed*
 | Muted Gold | `gold` | `#B99A62` |
 | Charcoal | `charcoal` | `#283238` |
 | Font family | `sans` | Inter |
-| Display font family (Proposed) | serif | Fraunces |
+| Display font family | — | Inter (one family, weight-led) |
 
 ## 17. Problem Statement and Operations
 

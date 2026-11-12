@@ -55,7 +55,7 @@ export function DestinationCard({
 
       {isStrip ? (
         <div className="absolute inset-x-0 bottom-0 p-4">
-          <h3 className="font-serif text-h3 font-semibold text-ivory">
+          <h3 className="text-h3 font-semibold text-ivory">
             {destination.name}
           </h3>
           <p className="mt-1 flex items-center gap-1.5 text-metadata font-medium text-ivory/90">
@@ -72,7 +72,7 @@ export function DestinationCard({
             </p>
             <h3
               className={cn(
-                "mt-1 font-serif font-semibold text-ivory",
+                "mt-1 font-semibold text-ivory",
                 featured ? "text-h2" : "text-h3",
               )}
             >

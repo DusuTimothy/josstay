@@ -9,10 +9,10 @@ import "./globals.css";
 /**
  * The brand type ships with the app.
  *
- * Fraunces and Inter are variable fonts kept in `app/fonts`, so the page never
- * depends on a font CDN, the build never needs the network, and the fallback
- * is metric-matched (`adjustFontFallback`) so swapping to the fallback does
- * not shift the layout.
+ * Inter is a variable font kept in `app/fonts`, so the page never depends on
+ * a font CDN, the build never needs the network, and the fallback is
+ * metric-matched (`adjustFontFallback`) so swapping to the fallback does not
+ * shift the layout.
  */
 const inter = localFont({
   src: [
@@ -26,24 +26,6 @@ const inter = localFont({
   display: "swap",
   fallback: ["system-ui", "Arial", "sans-serif"],
   adjustFontFallback: "Arial",
-});
-
-const fraunces = localFont({
-  src: [
-    {
-      path: "./fonts/Fraunces-Variable.woff2",
-      weight: "100 900",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Fraunces-Italic-Variable.woff2",
-      weight: "100 900",
-      style: "italic",
-    },
-  ],
-  variable: "--font-fraunces",
-  display: "swap",
-  fallback: ["Georgia", "Times New Roman", "serif"],
 });
 
 export const metadata: Metadata = {
@@ -93,7 +75,7 @@ export default function RootLayout({
   const website = websiteJsonLd();
 
   return (
-    <html lang="en-NG" className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="en-NG" className={inter.variable}>
       <body>
         <a
           href="#main-content"

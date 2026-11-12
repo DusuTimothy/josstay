@@ -33,7 +33,7 @@ export function ReservationSummary({
         className,
       )}
     >
-      <h2 className="font-serif text-h3 font-semibold text-ocean">
+      <h2 className="text-h3 font-semibold text-ocean">
         Your reservation
       </h2>
 

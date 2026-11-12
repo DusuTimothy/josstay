@@ -43,7 +43,7 @@ josstay/
 | Error (proposed) | `#B42318` | `error` |
 | Success (proposed) | `#3F6B58` | `success` |
 
-Type: **Fraunces** for the logo, H1 and H2; **Inter** for everything else. The type scale in `client/tailwind.config.ts` uses the brand ranges (`text-h1` = 40–48 px, `text-h2` = 28–32 px, etc.).
+Type: **Inter** for everything — one variable font, self-hosted. Weight does the work: Bold for H1 and H2, Semi-bold for H3 and hotel names, Medium for metadata. The type scale in `client/tailwind.config.ts` uses the brand ranges (`text-h1` = 40–48 px, `text-h2` = 28–32 px, etc.).
 
 ### Components built
 
@@ -282,7 +282,7 @@ in **§23 of the brand guidelines**.
 **Do first (cheap, no dependency on other steps)**
 
 - [ ] Before launch: give every link a page — nav `Rewards` → `/rewards` (step 6), footer `/about`, `/partners`, `/careers`, `/contact`, `/trust`, `/legal`, `/help/cancellations`. These are planned pages, not dead ends — they just do not exist yet.
-- [x] Self-host Fraunces and Inter with `next/font/local` so the brand type never silently falls back and the build no longer depends on Google Fonts
+- [x] Self-host Inter with `next/font/local` so the brand type never silently falls back and the build no longer depends on Google Fonts
 - [ ] Add pagination to `/search` — the API already returns `meta.total` and `page`, but the UI only ever shows the first 20 results
 - [ ] Use the existing `Skeleton` component while search and hotel detail load (nothing uses it yet)
 - [ ] Add the one reveal primitive from §23 — fade-up on scroll, no animation library, `prefers-reduced-motion` respected

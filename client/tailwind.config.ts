@@ -39,23 +39,15 @@ const config: Config = {
           "Segoe UI",
           "sans-serif",
         ],
-        serif: [
-          "var(--font-fraunces)",
-          "ui-serif",
-          "Georgia",
-          "Cambria",
-          "Times New Roman",
-          "serif",
-        ],
       },
       fontSize: {
         h1: [
           "clamp(2.5rem, 4vw, 3rem)",
-          { lineHeight: "1.08", letterSpacing: "-0.025em", fontWeight: "600" },
+          { lineHeight: "1.08", letterSpacing: "-0.025em", fontWeight: "700" },
         ],
         h2: [
           "clamp(1.75rem, 2.5vw, 2rem)",
-          { lineHeight: "1.18", letterSpacing: "-0.02em", fontWeight: "600" },
+          { lineHeight: "1.18", letterSpacing: "-0.02em", fontWeight: "700" },
         ],
         h3: [
           "clamp(1.25rem, 1.6vw, 1.5rem)",

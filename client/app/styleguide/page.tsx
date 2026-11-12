@@ -68,10 +68,10 @@ export default function StyleGuidePage() {
 
       <Section title="Typography">
         <div className="space-y-5 rounded-lg border border-sand bg-white p-6">
-          <p className="font-serif text-h1 text-ocean">
+          <p className="text-h1 text-ocean">
             H1 · Find somewhere that feels like home.
           </p>
-          <p className="font-serif text-h2 text-ocean">
+          <p className="text-h2 text-ocean">
             H2 · Stays guests return to
           </p>
           <p className="text-h3 text-ocean">H3 · What this place offers</p>

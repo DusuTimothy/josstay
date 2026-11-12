@@ -45,7 +45,7 @@ export function BookingPanel({
       )}
       aria-label="Your stay"
     >
-      <h2 className="font-serif text-h3 font-semibold text-ocean">Your stay</h2>
+      <h2 className="text-h3 font-semibold text-ocean">Your stay</h2>
 
       <dl className="mt-4 space-y-2 text-secondary text-charcoal/75">
         <div>
