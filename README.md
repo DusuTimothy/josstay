@@ -11,7 +11,7 @@ Hotel booking platform for Jos, Plateau State. This repository is the build scaf
 ```
 josstay/
 ├── client/                   What guests see (Next.js 15 + React 19 + Tailwind CSS)
-│   ├── app/                  Layout, home, search, hotel detail, checkout, sign-in, sign-up, style guide
+│   ├── app/                  Layout, home, search, hotel detail, checkout, booking status, sign-in, sign-up, style guide
 │   ├── components/           Brand component library (ui, layout, search, hotel, checkout, home)
 │   └── lib/                  Types, formatting, API client, constants, SEO helpers, sample data
 ├── server/                   What powers it (Express + TypeScript + Sequelize + Aiven)

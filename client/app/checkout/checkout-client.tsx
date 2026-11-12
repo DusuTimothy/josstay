@@ -214,12 +214,25 @@ export function CheckoutClient({ hotel, room, quote }: CheckoutClientProps) {
             </p>
           )}
 
-          <Link
-            href={`/hotels/${hotel.slug}`}
-            className={buttonVariants({ variant: "ghost", size: "md" })}
-          >
-            Back to the hotel
-          </Link>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href={`/checkout/complete?reference=${encodeURIComponent(
+                created.booking.reference,
+              )}`}
+              className={buttonVariants({
+                variant: created.payment ? "ghost" : "primary",
+                size: "md",
+              })}
+            >
+              View booking status
+            </Link>
+            <Link
+              href={`/hotels/${hotel.slug}`}
+              className={buttonVariants({ variant: "ghost", size: "md" })}
+            >
+              Back to the hotel
+            </Link>
+          </div>
         </CardBody>
       </Card>
     );
