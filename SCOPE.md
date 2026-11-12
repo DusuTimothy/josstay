@@ -162,6 +162,7 @@ available rooms =
 | Email / WhatsApp / Cloudinary services | Shells; not called from the flow yet |
 | Manager, front desk, admin dashboards | Not built |
 | Reviews, referrals, payouts | Not built |
+| UI polish (README step 7) | Backlog: dead links, self-hosted fonts, search pagination, loading skeletons, signed-in header state, map, guest reviews |
 | JSON-LD | Done for Organization, WebSite and hotel pages |
 | Seed data | 5 placeholder hotels, 10 rooms, demo manager/admin accounts |
 

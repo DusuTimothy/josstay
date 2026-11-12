@@ -272,6 +272,35 @@ Also run `git init` now and commit after every step.
 
 None of these should block the first real booking.
 
+### 7. UI polish (does not block the first booking)
+
+The numbered steps above are ordered by revenue path. This one is the craft
+that makes the site feel finished rather than generic — it lives here so it
+does not get lost between sessions.
+
+**Do first (cheap, no dependency on other steps)**
+
+- [ ] Remove the dead links: nav `Rewards` → `/rewards` (build it in step 6 or drop the link), footer `/about`, `/partners`, `/careers`, `/contact`
+- [ ] Self-host Fraunces and Inter with `next/font/local` so the brand type never silently falls back and the build no longer depends on Google Fonts
+- [ ] Add pagination to `/search` — the API already returns `meta.total` and `page`, but the UI only ever shows the first 20 results
+- [ ] Use the existing `Skeleton` component while search and hotel detail load (nothing uses it yet)
+
+**Do together with step 5 (Paystack)**
+
+- [ ] Remove the card number / expiry / CVC fields from `PaymentForm` — the guest pays on Paystack's hosted page, so collecting card details that are never sent is misleading
+- [ ] Make “Instant confirmation by email and WhatsApp” true, or soften the copy until Brevo and WhatsApp ship
+
+**Do later, with the rest of the guidelines**
+
+- [ ] Signed-in header state: an account menu instead of always showing “Sign in” (also listed in step 1)
+- [ ] Google Maps embed, pin and directions link on the hotel page — `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` is currently unused
+- [ ] Guest reviews on the hotel page (step 6 builds the moderation side)
+- [ ] `/rewards` page for the referral programme (step 6)
+
+**Done when:** every link in the header and footer resolves, the search page
+can reach every result, and no page shows an empty frame while it waits for
+the API.
+
 ### Rules for every step
 
 1. Make the smallest change that completes the step.
@@ -297,6 +326,7 @@ The checklist above is the order to build in. This list explains what each area 
 8. **Brevo + WhatsApp** — call `sendBookingConfirmation` from the verified webhook, not the browser.
 9. **Referrals, reviews, refunds** — per sections 17, 18 and 21 of the brand guidelines.
 10. **JSON-LD** — already wired for `Organization`, `WebSite` and hotel pages; extend it to other public pages and validate with Google's Rich Results Test.
+11. **UI polish** — the checklist in step 7: dead links, self-hosted fonts, search pagination, loading skeletons, then the signed-in header state, the map and guest reviews.
 
 > The sample hotels, destinations and photography URLs are placeholders. Replace them with real, verified Jos listings before launch.
 # josstay
