@@ -1,4 +1,4 @@
-import { Op } from "sequelize";
+import { Op, type Transaction } from "sequelize";
 import { env } from "../config/env";
 import {
   AvailabilityHold,
@@ -15,6 +15,13 @@ export interface AvailabilityInput {
   checkOut: string;
 }
 
+export interface AvailabilityOptions {
+  /** Run every query against this transaction. */
+  transaction?: Transaction;
+  /** Pass an already locked room row instead of fetching it again. */
+  room?: Room;
+}
+
 /**
  * Available rooms = total rooms
  *   − confirmed bookings for overlapping dates
@@ -25,12 +32,13 @@ export interface AvailabilityInput {
  * transaction with a row lock (SELECT ... FOR UPDATE) so two guests cannot take
  * the last room.
  */
-export async function countAvailableRooms({
-  roomId,
-  checkIn,
-  checkOut,
-}: AvailabilityInput): Promise<number> {
-  const room = await Room.findByPk(roomId);
+export async function countAvailableRooms(
+  { roomId, checkIn, checkOut }: AvailabilityInput,
+  options: AvailabilityOptions = {},
+): Promise<number> {
+  const room =
+    options.room ??
+    (await Room.findByPk(roomId, { transaction: options.transaction }));
 
   if (!room || !room.isActive) {
     throw ApiError.notFound("That room is not available.");
@@ -46,6 +54,7 @@ export async function countAvailableRooms({
         checkIn: { [Op.lt]: checkOut },
         checkOut: { [Op.gt]: checkIn },
       },
+      transaction: options.transaction,
     }),
     AvailabilityHold.sum("rooms", {
       where: {
@@ -54,6 +63,7 @@ export async function countAvailableRooms({
         checkIn: { [Op.lt]: checkOut },
         checkOut: { [Op.gt]: checkIn },
       },
+      transaction: options.transaction,
     }),
     BlockedDate.sum("roomsBlocked", {
       where: {
@@ -61,6 +71,7 @@ export async function countAvailableRooms({
         startDate: { [Op.lt]: checkOut },
         endDate: { [Op.gt]: checkIn },
       },
+      transaction: options.transaction,
     }),
   ]);
 
@@ -73,12 +84,17 @@ export async function countAvailableRooms({
   );
 }
 
-export async function createAvailabilityHold(input: AvailabilityInput & {
-  rooms: number;
-  sessionId: string;
-  minutes?: number;
-}) {
-  const available = await countAvailableRooms(input);
+export async function createAvailabilityHold(
+  input: AvailabilityInput & {
+    rooms: number;
+    sessionId: string;
+    minutes?: number;
+  },
+  options: AvailabilityOptions = {},
+) {
+  const available = await countAvailableRooms(input, {
+    transaction: options.transaction,
+  });
 
   if (available < input.rooms) {
     throw ApiError.conflict(
@@ -86,14 +102,17 @@ export async function createAvailabilityHold(input: AvailabilityInput & {
     );
   }
 
-  return AvailabilityHold.create({
-    roomId: input.roomId,
-    sessionId: input.sessionId,
-    checkIn: input.checkIn,
-    checkOut: input.checkOut,
-    rooms: input.rooms,
-    expiresAt: addHours(new Date(), input.minutes ?? env.BOOKING_HOLD_MINUTES),
-  });
+  return AvailabilityHold.create(
+    {
+      roomId: input.roomId,
+      sessionId: input.sessionId,
+      checkIn: input.checkIn,
+      checkOut: input.checkOut,
+      rooms: input.rooms,
+      expiresAt: addHours(new Date(), input.minutes ?? env.BOOKING_HOLD_MINUTES),
+    },
+    { transaction: options.transaction },
+  );
 }
 
 export async function releaseExpiredHolds(): Promise<number> {
